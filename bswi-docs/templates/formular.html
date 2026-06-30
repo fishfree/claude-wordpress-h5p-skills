@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular – BS:WI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+        
+        :root {
+            --bswi-blau-1: #1C3D71;
+            --bswi-blau-3: #1266B0;
+            --bswi-blau-4: #008BC9;
+            --bswi-blau-5: #41C0F0;
+            --bswi-blau-7: #EAF6FE;
+            --bswi-dunkelgrau: #666666;
+            --bswi-hellgrau: #F6F6F6;
+            --page-padding: 10mm;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #000; background: #e8e8e8; }
+        
+        .bswi-document { max-width: 210mm; min-height: 297mm; margin: 10mm auto; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
+        
+        .bswi-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 5mm var(--page-padding); border-bottom: 2.5px solid var(--bswi-blau-1); background: linear-gradient(180deg, var(--bswi-blau-7) 0%, #fff 100%); }
+        .bswi-logo { height: 30px; width: auto; }
+        .bswi-header-center { text-align: center; }
+        .bswi-title { font-size: 14pt; font-weight: 700; color: var(--bswi-blau-1); margin: 0; }
+        .bswi-subtitle { font-size: 9pt; color: var(--bswi-blau-3); margin-top: 2px; }
+        .bswi-header-right { text-align: right; font-size: 8pt; color: var(--bswi-dunkelgrau); }
+        
+        .bswi-content { flex: 1; padding: var(--page-padding); }
+        .bswi-form-section { margin-bottom: 1.5em; }
+        .bswi-form-section-header { font-size: 11pt; font-weight: 700; color: var(--bswi-blau-1); padding: 6px 10px; background: var(--bswi-blau-7); border-left: 4px solid var(--bswi-blau-4); margin-bottom: 12px; }
+        
+        .bswi-field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin-bottom: 12px; }
+        .bswi-field-group.full { grid-template-columns: 1fr; }
+        .bswi-field { display: flex; flex-direction: column; gap: 4px; }
+        .bswi-field-label { font-size: 9pt; font-weight: 600; color: var(--bswi-dunkelgrau); }
+        .bswi-field-input { border: none; border-bottom: 1.5px solid var(--bswi-dunkelgrau); min-height: 1.8em; padding: 2px 0; }
+        .bswi-field-input.tall { min-height: 4em; border: 1.5px solid var(--bswi-dunkelgrau); border-radius: 4px; }
+        
+        .bswi-checkbox-group { margin: 12px 0; }
+        .bswi-checkbox-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+        .bswi-checkbox { width: 16px; height: 16px; border: 2px solid var(--bswi-blau-1); border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+        .bswi-checkbox-label { font-size: 10pt; }
+        
+        .bswi-signature-area { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 2em; padding-top: 1.5em; border-top: 1px solid var(--bswi-dunkelgrau); }
+        .bswi-signature { text-align: center; }
+        .bswi-signature-line { border-bottom: 1px solid #000; height: 3em; margin-bottom: 6px; }
+        .bswi-signature-label { font-size: 8pt; color: var(--bswi-dunkelgrau); }
+        
+        .bswi-hinweis { font-size: 8pt; color: var(--bswi-dunkelgrau); background: var(--bswi-hellgrau); padding: 10px 12px; border-radius: 4px; margin-top: 1.5em; }
+        
+        .bswi-footer { padding: 3mm var(--page-padding); border-top: 2px solid var(--bswi-blau-1); background: #fff; font-size: 8pt; display: flex; justify-content: space-between; align-items: center; color: var(--bswi-dunkelgrau); }
+        .bswi-footer-claim { font-weight: 600; font-style: italic; color: var(--bswi-blau-3); }
+        
+        @media print { body { background: none; } .bswi-document { box-shadow: none; margin: 0; max-width: none; min-height: auto; } @page { size: A4 portrait; margin: 0; } }
+    </style>
+</head>
+<body>
+<div class="bswi-document">
+    <header class="bswi-header">
+        <svg class="bswi-logo" viewBox="0 0 692.7 566.9" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="g1" x1="399.7" y1="366.2" x2="1258.5" y2="80.8" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#41C0F0"/><stop offset="0.4" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g2" x1="212.7" y1="462.7" x2="-54.8" y2="242.1" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#067AA7"/><stop offset="0.6" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g3" x1="241.1" y1="340.2" x2="423.9" y2="424.6" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#067AA7"/><stop offset="0.3" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g4" x1="515.2" y1="15.2" x2="280.7" y2="716.7" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#0E66AF"/><stop offset="0.7" stop-color="#1B3D71"/></linearGradient>
+            </defs>
+            <path d="M689.4 0 616.1 18.8C603.2 22.1 593.8 31.7 590.4 44.5L450.2 566.9 624.9 566.9 689.4 0Z" fill="url(#g1)"/>
+            <path d="M156.2 136.4 29.8 168.7C13.7 172.9 0 189.5 0 206.2L0 567 156.2 567 156.2 136.4Z" fill="url(#g2)"/>
+            <path d="M220.5 566.9 385.9 566.9 369.5 163.2 248.5 194.2 220.5 566.9Z" fill="url(#g3)"/>
+            <path d="M248.5 194.2 0 566.9 156.2 566.9 369.5 163.2 248.4 194.2ZM460.2 58.7 220.5 567 385.9 567 559.5 33.3 460.2 58.7ZM680 157.5 586.1 60.7 450.3 567 661.6 567 692.6 185.5C693.6 173 689.1 167 680 157.6Z" fill="url(#g4)"/>
+        </svg>
+        
+        <div class="bswi-header-center">
+            <h1 class="bswi-title">{{FORMULAR_TITEL}}</h1>
+            <p class="bswi-subtitle">{{FORMULAR_UNTERTITEL}}</p>
+        </div>
+        
+        <div class="bswi-header-right">Formular-Nr.: {{NR}}<br>Stand: {{STAND}}</div>
+    </header>
+    
+    <main class="bswi-content">
+        <section class="bswi-form-section">
+            <div class="bswi-form-section-header">1. Persönliche Daten</div>
+            <div class="bswi-field-group">
+                <div class="bswi-field"><span class="bswi-field-label">Nachname</span><span class="bswi-field-input"></span></div>
+                <div class="bswi-field"><span class="bswi-field-label">Vorname</span><span class="bswi-field-input"></span></div>
+            </div>
+            <div class="bswi-field-group">
+                <div class="bswi-field"><span class="bswi-field-label">Geburtsdatum</span><span class="bswi-field-input"></span></div>
+                <div class="bswi-field"><span class="bswi-field-label">Klasse / Kurs</span><span class="bswi-field-input"></span></div>
+            </div>
+            <div class="bswi-field-group full">
+                <div class="bswi-field"><span class="bswi-field-label">E-Mail-Adresse</span><span class="bswi-field-input"></span></div>
+            </div>
+        </section>
+        
+        <section class="bswi-form-section">
+            <div class="bswi-form-section-header">2. {{ABSCHNITT_2_TITEL}}</div>
+            <div class="bswi-checkbox-group">
+                <div class="bswi-checkbox-item"><div class="bswi-checkbox"></div><span class="bswi-checkbox-label">{{OPTION_1}}</span></div>
+                <div class="bswi-checkbox-item"><div class="bswi-checkbox"></div><span class="bswi-checkbox-label">{{OPTION_2}}</span></div>
+                <div class="bswi-checkbox-item"><div class="bswi-checkbox"></div><span class="bswi-checkbox-label">{{OPTION_3}}</span></div>
+                <div class="bswi-checkbox-item"><div class="bswi-checkbox"></div><span class="bswi-checkbox-label">Sonstiges: ___________________________</span></div>
+            </div>
+        </section>
+        
+        <section class="bswi-form-section">
+            <div class="bswi-form-section-header">3. Bemerkungen</div>
+            <div class="bswi-field-group full"><div class="bswi-field"><span class="bswi-field-input tall"></span></div></div>
+        </section>
+        
+        <div class="bswi-signature-area">
+            <div class="bswi-signature"><div class="bswi-signature-line"></div><span class="bswi-signature-label">Ort, Datum</span></div>
+            <div class="bswi-signature"><div class="bswi-signature-line"></div><span class="bswi-signature-label">Unterschrift</span></div>
+        </div>
+        
+        <div class="bswi-hinweis"><strong>Hinweis:</strong> {{HINWEIS_TEXT}}</div>
+    </main>
+    
+    <footer class="bswi-footer">
+        <div>Dirk Schulenburg · BS:WI</div>
+        <div class="bswi-footer-claim">Kompetent Zukunft Gestalten</div>
+    </footer>
+</div>
+</body>
+</html>

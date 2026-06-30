@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handout – BS:WI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+        
+        :root {
+            --bswi-blau-1: #1C3D71;
+            --bswi-blau-3: #1266B0;
+            --bswi-blau-4: #008BC9;
+            --bswi-blau-5: #41C0F0;
+            --bswi-blau-7: #EAF6FE;
+            --bswi-dunkelgrau: #666666;
+            --bswi-hellgrau: #F6F6F6;
+            --page-padding: 12mm;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { font-family: 'Montserrat', Arial, sans-serif; font-size: 13pt; line-height: 1.7; color: #000; background: #e8e8e8; }
+        
+        .bswi-document { max-width: 210mm; min-height: 297mm; margin: 10mm auto; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
+        
+        .bswi-header { display: flex; align-items: center; gap: 16px; padding: 5mm var(--page-padding); border-bottom: 3px solid var(--bswi-blau-1); background: var(--bswi-blau-7); }
+        .bswi-logo { height: 30px; width: auto; }
+        .bswi-title { font-size: 20pt; font-weight: 700; color: var(--bswi-blau-1); flex: 1; }
+        
+        .bswi-content { flex: 1; padding: var(--page-padding); }
+        .bswi-content h1 { font-size: 16pt; font-weight: 700; color: var(--bswi-blau-1); margin: 0 0 0.6em 0; padding-bottom: 6px; border-bottom: 2px solid var(--bswi-blau-5); }
+        .bswi-content h2 { font-size: 14pt; font-weight: 700; color: var(--bswi-blau-3); margin: 1.2em 0 0.4em 0; }
+        .bswi-content p { margin: 0 0 1em 0; }
+        .bswi-content ul { margin: 0 0 1em 1.5em; }
+        .bswi-content li { margin-bottom: 0.5em; }
+        
+        .bswi-step { display: flex; gap: 16px; margin-bottom: 1.2em; align-items: flex-start; }
+        .bswi-step-number { background: var(--bswi-blau-1); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18pt; flex-shrink: 0; }
+        .bswi-step-content { flex: 1; padding-top: 6px; }
+        
+        .bswi-wichtig { background: var(--bswi-blau-7); border: 2px solid var(--bswi-blau-4); border-radius: 10px; padding: 16px 20px; margin: 1.2em 0; font-size: 14pt; }
+        .bswi-wichtig::before { content: "❗ Wichtig: "; font-weight: 700; color: var(--bswi-blau-1); }
+        
+        .bswi-bild { background: var(--bswi-hellgrau); border: 2px dashed var(--bswi-dunkelgrau); border-radius: 8px; padding: 40px; text-align: center; color: var(--bswi-dunkelgrau); margin: 1em 0; }
+        
+        .bswi-footer { padding: 3mm var(--page-padding); border-top: 2px solid var(--bswi-blau-1); background: #fff; font-size: 9pt; display: flex; justify-content: space-between; align-items: center; color: var(--bswi-dunkelgrau); }
+        .bswi-footer-claim { font-weight: 600; font-style: italic; color: var(--bswi-blau-3); }
+        
+        @media print { body { background: none; } .bswi-document { box-shadow: none; margin: 0; max-width: none; min-height: auto; } @page { size: A4 portrait; margin: 0; } }
+    </style>
+</head>
+<body>
+<div class="bswi-document">
+    <header class="bswi-header">
+        <svg class="bswi-logo" viewBox="0 0 692.7 566.9" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="g1" x1="399.7" y1="366.2" x2="1258.5" y2="80.8" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#41C0F0"/><stop offset="0.4" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g2" x1="212.7" y1="462.7" x2="-54.8" y2="242.1" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#067AA7"/><stop offset="0.6" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g3" x1="241.1" y1="340.2" x2="423.9" y2="424.6" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#067AA7"/><stop offset="0.3" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g4" x1="515.2" y1="15.2" x2="280.7" y2="716.7" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#0E66AF"/><stop offset="0.7" stop-color="#1B3D71"/></linearGradient>
+            </defs>
+            <path d="M689.4 0 616.1 18.8C603.2 22.1 593.8 31.7 590.4 44.5L450.2 566.9 624.9 566.9 689.4 0Z" fill="url(#g1)"/>
+            <path d="M156.2 136.4 29.8 168.7C13.7 172.9 0 189.5 0 206.2L0 567 156.2 567 156.2 136.4Z" fill="url(#g2)"/>
+            <path d="M220.5 566.9 385.9 566.9 369.5 163.2 248.5 194.2 220.5 566.9Z" fill="url(#g3)"/>
+            <path d="M248.5 194.2 0 566.9 156.2 566.9 369.5 163.2 248.4 194.2ZM460.2 58.7 220.5 567 385.9 567 559.5 33.3 460.2 58.7ZM680 157.5 586.1 60.7 450.3 567 661.6 567 692.6 185.5C693.6 173 689.1 167 680 157.6Z" fill="url(#g4)"/>
+        </svg>
+        <h1 class="bswi-title">{{TITEL}}</h1>
+    </header>
+    
+    <main class="bswi-content">
+        <h1>{{HAUPTÜBERSCHRIFT}}</h1>
+        
+        <div class="bswi-step">
+            <div class="bswi-step-number">1</div>
+            <div class="bswi-step-content"><strong>{{SCHRITT_1_TITEL}}</strong><br>{{SCHRITT_1_TEXT}}</div>
+        </div>
+        
+        <div class="bswi-step">
+            <div class="bswi-step-number">2</div>
+            <div class="bswi-step-content"><strong>{{SCHRITT_2_TITEL}}</strong><br>{{SCHRITT_2_TEXT}}</div>
+        </div>
+        
+        <div class="bswi-step">
+            <div class="bswi-step-number">3</div>
+            <div class="bswi-step-content"><strong>{{SCHRITT_3_TITEL}}</strong><br>{{SCHRITT_3_TEXT}}</div>
+        </div>
+        
+        <div class="bswi-wichtig">{{WICHTIG_TEXT}}</div>
+        <div class="bswi-bild">[Bild hier einfügen]</div>
+    </main>
+    
+    <footer class="bswi-footer">
+        <div>Dirk Schulenburg · BS:WI</div>
+        <div class="bswi-footer-claim">Kompetent Zukunft Gestalten</div>
+    </footer>
+</div>
+</body>
+</html>

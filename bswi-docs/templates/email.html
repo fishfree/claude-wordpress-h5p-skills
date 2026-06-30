@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mail – BS:WI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+        
+        :root {
+            --bswi-blau-1: #1C3D71;
+            --bswi-blau-3: #1266B0;
+            --bswi-blau-4: #008BC9;
+            --bswi-blau-5: #41C0F0;
+            --bswi-blau-7: #EAF6FE;
+            --bswi-dunkelgrau: #666666;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #333; background: #e8e8e8; }
+        
+        .email-container { max-width: 650px; margin: 20px auto; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        
+        .email-header { background: linear-gradient(135deg, var(--bswi-blau-1) 0%, var(--bswi-blau-3) 100%); padding: 20px 30px; display: flex; align-items: center; gap: 16px; }
+        .email-logo { height: 36px; width: auto; }
+        .email-header-text { color: #fff; }
+        .email-header-name { font-size: 14pt; font-weight: 700; }
+        .email-header-school { font-size: 9pt; opacity: 0.9; }
+        
+        .email-meta { background: var(--bswi-blau-7); padding: 16px 30px; border-bottom: 1px solid var(--bswi-blau-5); font-size: 10pt; }
+        .email-meta-row { display: grid; grid-template-columns: 70px 1fr; margin-bottom: 6px; }
+        .email-meta-row:last-child { margin-bottom: 0; }
+        .email-meta-label { font-weight: 600; color: var(--bswi-dunkelgrau); }
+        .email-meta-value { color: #000; }
+        .email-meta-betreff { font-weight: 700; color: var(--bswi-blau-1); }
+        
+        .email-body { padding: 30px; }
+        .email-body p { margin-bottom: 1em; }
+        .email-body ul { margin: 0.5em 0 1em 1.5em; }
+        .email-body li { margin-bottom: 0.3em; }
+        .email-greeting { margin-bottom: 1.2em; }
+        .email-closing { margin-top: 1.5em; }
+        
+        .email-highlight { background: var(--bswi-blau-7); border-left: 4px solid var(--bswi-blau-4); padding: 12px 16px; margin: 1em 0; border-radius: 0 6px 6px 0; }
+        .email-cta { display: inline-block; background: var(--bswi-blau-4); color: #fff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 1em 0; }
+        .email-cta:hover { background: var(--bswi-blau-1); }
+        
+        .email-signature { margin-top: 2em; padding-top: 1.5em; border-top: 1px solid #ddd; font-size: 10pt; color: var(--bswi-dunkelgrau); }
+        .email-sig-name { font-weight: 700; color: var(--bswi-blau-1); font-size: 11pt; }
+        .email-sig-role { margin-bottom: 0.8em; }
+        .email-sig-contact { line-height: 1.8; }
+        .email-sig-contact a { color: var(--bswi-blau-4); text-decoration: none; }
+        
+        .email-footer { background: var(--bswi-blau-1); color: #fff; padding: 12px 30px; font-size: 8pt; text-align: center; }
+        .email-footer a { color: var(--bswi-blau-5); text-decoration: none; }
+        .email-footer-claim { font-style: italic; margin-top: 4px; opacity: 0.8; }
+        
+        @media print { body { background: none; } .email-container { box-shadow: none; margin: 0; max-width: none; } }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <header class="email-header">
+        <svg class="email-logo" viewBox="0 0 692.7 566.9" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="g1" x1="399.7" y1="366.2" x2="1258.5" y2="80.8" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#41C0F0"/><stop offset="0.4" stop-color="#A4DBF8"/></linearGradient>
+                <linearGradient id="g2" x1="212.7" y1="462.7" x2="-54.8" y2="242.1" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#fff"/><stop offset="0.6" stop-color="#A4DBF8"/><stop offset="1" stop-color="#fff"/></linearGradient>
+                <linearGradient id="g3" x1="241.1" y1="340.2" x2="423.9" y2="424.6" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#fff"/><stop offset="0.3" stop-color="#A4DBF8"/><stop offset="1" stop-color="#fff"/></linearGradient>
+                <linearGradient id="g4" x1="515.2" y1="15.2" x2="280.7" y2="716.7" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#A4DBF8"/><stop offset="0.7" stop-color="#fff"/></linearGradient>
+            </defs>
+            <path d="M689.4 0 616.1 18.8C603.2 22.1 593.8 31.7 590.4 44.5L450.2 566.9 624.9 566.9 689.4 0Z" fill="url(#g1)"/>
+            <path d="M156.2 136.4 29.8 168.7C13.7 172.9 0 189.5 0 206.2L0 567 156.2 567 156.2 136.4Z" fill="url(#g2)"/>
+            <path d="M220.5 566.9 385.9 566.9 369.5 163.2 248.5 194.2 220.5 566.9Z" fill="url(#g3)"/>
+            <path d="M248.5 194.2 0 566.9 156.2 566.9 369.5 163.2 248.4 194.2ZM460.2 58.7 220.5 567 385.9 567 559.5 33.3 460.2 58.7ZM680 157.5 586.1 60.7 450.3 567 661.6 567 692.6 185.5C693.6 173 689.1 167 680 157.6Z" fill="url(#g4)"/>
+        </svg>
+        <div class="email-header-text">
+            <div class="email-header-name">Dirk Schulenburg</div>
+            <div class="email-header-school">BS:WI – Berufliche Schule für Wirtschaft und Internationales Hamburg</div>
+        </div>
+    </header>
+    
+    <div class="email-meta">
+        <div class="email-meta-row"><span class="email-meta-label">An:</span><span class="email-meta-value">{{EMPFÄNGER}}</span></div>
+        <div class="email-meta-row"><span class="email-meta-label">Betreff:</span><span class="email-meta-value email-meta-betreff">{{BETREFF}}</span></div>
+    </div>
+    
+    <main class="email-body">
+        <p class="email-greeting">{{ANREDE}}</p>
+        <p>{{TEXT_ABSATZ_1}}</p>
+        <p>{{TEXT_ABSATZ_2}}</p>
+        <div class="email-highlight">{{HIGHLIGHT_TEXT}}</div>
+        <p>{{TEXT_ABSATZ_3}}</p>
+        
+        <div class="email-closing"><p>Mit freundlichen Grüßen</p></div>
+        
+        <div class="email-signature">
+            <div class="email-sig-logo">
+                <svg viewBox="0 0 692.7 566.9" xmlns="http://www.w3.org/2000/svg" style="height: 32px; width: auto; margin-bottom: 10px;">
+                    <defs>
+                        <linearGradient id="sg1" x1="399.7" y1="366.2" x2="1258.5" y2="80.8" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#41C0F0"/><stop offset="0.4" stop-color="#A4DBF8"/></linearGradient>
+                        <linearGradient id="sg2" x1="212.7" y1="462.7" x2="-54.8" y2="242.1" gradientUnits="userSpaceOnUse"><stop offset="0.3" stop-color="#067AA7"/><stop offset="0.6" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                        <linearGradient id="sg3" x1="241.1" y1="340.2" x2="423.9" y2="424.6" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#067AA7"/><stop offset="0.3" stop-color="#41C0F0"/><stop offset="1" stop-color="#A4DBF8"/></linearGradient>
+                        <linearGradient id="sg4" x1="515.2" y1="15.2" x2="280.7" y2="716.7" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#0E66AF"/><stop offset="0.7" stop-color="#1B3D71"/></linearGradient>
+                    </defs>
+                    <path d="M689.4 0 616.1 18.8C603.2 22.1 593.8 31.7 590.4 44.5L450.2 566.9 624.9 566.9 689.4 0Z" fill="url(#sg1)"/>
+                    <path d="M156.2 136.4 29.8 168.7C13.7 172.9 0 189.5 0 206.2L0 567 156.2 567 156.2 136.4Z" fill="url(#sg2)"/>
+                    <path d="M220.5 566.9 385.9 566.9 369.5 163.2 248.5 194.2 220.5 566.9Z" fill="url(#sg3)"/>
+                    <path d="M248.5 194.2 0 566.9 156.2 566.9 369.5 163.2 248.4 194.2ZM460.2 58.7 220.5 567 385.9 567 559.5 33.3 460.2 58.7ZM680 157.5 586.1 60.7 450.3 567 661.6 567 692.6 185.5C693.6 173 689.1 167 680 157.6Z" fill="url(#sg4)"/>
+                </svg>
+            </div>
+            <div class="email-sig-name">Dirk Schulenburg</div>
+            <div class="email-sig-role">{{FUNKTION}}</div>
+            <div class="email-sig-contact">
+                BS:WI – Berufliche Schule für Wirtschaft und Internationales<br>
+                Hinrichsenstraße 35 · 20535 Hamburg<br>
+                <a href="mailto:vorname.nachname@schule.de">vorname.nachname@schule.de</a><br>
+                Tel: +49 40 428 976 - 0
+            </div>
+        </div>
+    </main>
+    
+    <footer class="email-footer">
+        <div><a href="https://www.bswi.hamburg">www.bswi.hamburg</a></div>
+        <div class="email-footer-claim">Kompetent Zukunft Gestalten</div>
+    </footer>
+</div>
+</body>
+</html>
