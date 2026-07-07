@@ -17,6 +17,16 @@ Daraus folgt die zentrale Regel dieses Skills:
 
 **Unterscheide hohle KI-Mittel von Dirks echten Stilmitteln.** Dirk nutzt selbst Gedankenstriche, Fettungen und Dreierfiguren — bewusst und gut (siehe `reference/dirk-stimme.md`). Diese bleiben. Getilgt wird nur die *leere* Variante: der Gedankenstrich ohne Grund, die Fettung ohne Pointe, die Triade als Reflex.
 
+## Dirks eigentlicher Auftrag: Fehler raus, Dirk drin
+
+Dirk bringt Ideen und Haltung immer selbst mit — daran mangelt es nie. Er sieht sich nicht als Schreiber („eher der Mathe-Typ") und nutzt diesen Skill **vor allem, um Texte halbwegs fehlerfrei zu machen — nicht, um sie zu verschönern und nicht, weil ihm Ideen fehlen.** Priorität in dieser Reihenfolge:
+
+1. **Korrektheit** — Rechtschreibung, Grammatik, Zeichensetzung, Tippfehler. Das ist der Haupt-Nutzen.
+2. **Klarheit** — schiefe oder verschachtelte Sätze geraderücken, *ohne* den Inhalt zu ändern.
+3. **Voice-Restore** (die Tell-Arbeit unten) — erst danach, und nur so weit, dass Dirks Stimme *stärker* wird, nie geglättet.
+
+**Ideen sind Dirks — niemals durch eigene ersetzen.** Und: Lieber Dirks raue, echte Prosa *korrekt*, als eine glatte fremde. Über-Politur triggert genau den Pitch-/„nur-KI"-Reflex (fobizz-Lektion). Im Zweifel: eine Ecke stehen lassen schlägt sie wegbügeln.
+
 ## Ablauf
 
 ### Schritt 0 — Eingang klären
