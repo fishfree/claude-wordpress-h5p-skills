@@ -1,0 +1,76 @@
+{
+  "dirk-schulenburg": {
+    "name": "dirk-schulenburg.net",
+    "primary": "#1e293b",
+    "secondary": "#334155",
+    "accent": "#B5E505",
+    "background": "linear-gradient(135deg, #0f172a, #1e293b)",
+    "text": "#f8fafc",
+    "textMuted": "#94a3b8",
+    "font": "Inter, system-ui, sans-serif",
+    "logo": "DS Monogram",
+    "style": "modern-minimal"
+  },
+  "cannabis-kultur": {
+    "name": "cannabis-kultur.online",
+    "primary": "#0c1929",
+    "secondary": "#162a44",
+    "accent": "#22c55e",
+    "background": "linear-gradient(135deg, #0c1929, #162a44)",
+    "text": "#e2e8f0",
+    "textMuted": "#64748b",
+    "font": "Inter, system-ui, sans-serif",
+    "logo": "Cannabis Leaf",
+    "style": "dark-botanical"
+  },
+  "stecklingsmeister": {
+    "name": "Stecklingsmeister",
+    "primary": "#1a3a2a",
+    "secondary": "#2d5a3f",
+    "accent": "#c8a45e",
+    "background": "linear-gradient(135deg, #1a3a2a, #0d1f15)",
+    "text": "#e8f0e8",
+    "textMuted": "#8ba88b",
+    "font": "Inter, system-ui, sans-serif",
+    "logo": "Seedling",
+    "style": "botanical-elegant"
+  },
+  "lernmodule": {
+    "name": "Lernmodule",
+    "primary": "#ffffff",
+    "secondary": "#f8fafc",
+    "accent": "#3b82f6",
+    "background": "#ffffff",
+    "text": "#1e293b",
+    "textMuted": "#64748b",
+    "font": "Inter, system-ui, sans-serif",
+    "logo": "Graduation Cap",
+    "style": "clean-light"
+  },
+  "bswi": {
+    "name": "BS:WI Hamburg",
+    "primary": "#003366",
+    "secondary": "#004080",
+    "accent": "#00A3E0",
+    "highlight": "#B5E505",
+    "background": "#ffffff",
+    "text": "#333333",
+    "textMuted": "#666666",
+    "font": "Arial, Helvetica, sans-serif",
+    "logo": "BS:WI Logo",
+    "style": "corporate-education"
+  },
+  "dirk-personal": {
+    "name": "Dirk Schulenburg — Personal Brand",
+    "primary": "#0f0f0f",
+    "secondary": "#1a1a1a",
+    "accent": "#d4a843",
+    "accentBright": "#f5c542",
+    "background": "linear-gradient(135deg, #0f0f0f, #1a1a1a)",
+    "text": "#e8e8e8",
+    "textMuted": "#888888",
+    "font": "Inter, system-ui, sans-serif",
+    "logo": "DS",
+    "style": "dark-gold"
+  }
+}

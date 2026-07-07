@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[LF] [LS]: [TITEL] - Übersicht</title>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0077b6;
+            --accent: #00a8e8;
+            --success: #28a745;
+            --warning: #ffc107;
+            --light: #f8f9fa;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,51,102,0.3);
+        }
+        .header h1 { margin: 0 0 10px 0; font-size: 1.8em; }
+        .header .subtitle { opacity: 0.9; font-size: 1.1em; }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .meta-item {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .intro-box {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .intro-box h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        .lernziele {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .lernziele h3 { color: #2e7d32; margin-top: 0; }
+        .lernziele ul { margin: 0; padding-left: 20px; }
+
+        .phase {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .phase-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .phase-number {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .phase-title h3 { margin: 0; font-size: 1.1em; }
+        .phase-title .duration { opacity: 0.8; font-size: 0.9em; }
+
+        .phase-content { padding: 20px; }
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .material-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .material-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(0,119,182,0.15);
+            transform: translateY(-2px);
+        }
+        .material-card .type {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .type-info { background: #e3f2fd; color: #1565c0; }
+        .type-uebung { background: #e8f5e9; color: #2e7d32; }
+        .type-arbeitsblatt { background: #fff3e0; color: #ef6c00; }
+        .type-fallmaterial { background: #fce4ec; color: #c2185b; }
+        .type-bewertung { background: #f3e5f5; color: #7b1fa2; }
+        .type-checkliste { background: #e0f2f1; color: #00796b; }
+        .type-h5p { background: #ede7f6; color: #512da8; }
+        .type-excel { background: #e8f5e9; color: #388e3c; }
+
+        .material-card h4 { margin: 0 0 5px 0; color: var(--primary); }
+        .material-card p { margin: 0; font-size: 0.9em; color: #666; }
+
+        .h5p-section {
+            background: #ede7f6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .h5p-section h4 { margin: 0 0 10px 0; color: #512da8; }
+        .h5p-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .h5p-item {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            border: 1px solid #d1c4e9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer a { color: var(--secondary); }
+
+        @media print {
+            body { background: white; }
+            .phase, .intro-box { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lernsituation [N]: [TITEL]</h1>
+        <div class="subtitle">[UNTERTITEL]</div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Lernfeld:</strong> [LF]</div>
+            <div class="meta-item"><strong>Zeitrichtwert:</strong> [X] UStd</div>
+            <div class="meta-item"><strong>Ausbildungsjahr:</strong> [N]</div>
+            <div class="meta-item"><strong>Modellunternehmen:</strong> [FIRMA]</div>
+        </div>
+    </div>
+
+    <div class="intro-box">
+        <h2>Ausgangssituation</h2>
+        <p>[BESCHREIBUNG DER AUSGANGSSITUATION]</p>
+        <p><strong>Handlungsprodukt:</strong> [HANDLUNGSPRODUKT]</p>
+
+        <div class="lernziele">
+            <h3>Lernziele</h3>
+            <ul>
+                <li>[Lernziel 1]</li>
+                <li>[Lernziel 2]</li>
+                <li>[Lernziel 3]</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-number">1</div>
+            <div class="phase-title">
+                <h3>[PHASE 1 TITEL]</h3>
+                <div class="duration">Block 1 | [X] UStd | Station 1</div>
+            </div>
+        </div>
+        <div class="phase-content">
+            <div class="material-grid">
+                <a href="[DATEI].html" class="material-card">
+                    <span class="type type-info">Infomaterial</span>
+                    <h4>[NR]: [TITEL]</h4>
+                    <p>[BESCHREIBUNG]</p>
+                </a>
+                <!-- Weitere Materialien -->
+            </div>
+            <div class="h5p-section">
+                <h4>Interaktive H5P-Inhalte (Moodle)</h4>
+                <div class="h5p-list">
+                    <span class="h5p-item">[H5P-Titel 1]</span>
+                    <span class="h5p-item">[H5P-Titel 2]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weitere Phasen... -->
+
+    <div class="footer">
+        <p>
+            <strong>[LF] [LS]: [TITEL]</strong> |
+            [MODELLUNTERNEHMEN] |
+            <a href="[MOODLE-LINK]" target="_blank">Moodle-Kurs</a>
+        </p>
+        <p>Erstellt mit dem Lesson Creator | Stand: [DATUM]</p>
+    </div>
+</body>
+</html>
