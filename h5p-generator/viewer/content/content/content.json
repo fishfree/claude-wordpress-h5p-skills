@@ -1,0 +1,328 @@
+{
+  "scoreShow": "Punkte anzeigen",
+  "tryAgain": "Nochmal",
+  "scoreExplanation": "Richtige Zuordnungen geben Punkte.",
+  "question": {
+    "settings": {
+      "size": {
+        "width": 620,
+        "height": 400
+      },
+      "background": {
+        "path": "images/background.jpg",
+        "mime": "image/jpeg",
+        "copyright": {
+          "license": "U"
+        }
+      }
+    },
+    "task": {
+      "elements": [
+        {
+          "x": 2.0,
+          "y": 2.0,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "0"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Priorisiert das Backlog</p>"
+            },
+            "subContentId": "drag-0",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Priorisiert das Backlog"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 6.3,
+          "y": 2.0,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "1"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Entfernt Hindernisse</p>"
+            },
+            "subContentId": "drag-1",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Entfernt Hindernisse"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 10.6,
+          "y": 2.0,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "2"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Implementiert Features</p>"
+            },
+            "subContentId": "drag-2",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Implementiert Features"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 14.9,
+          "y": 2.0,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "0"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Definiert User Stories</p>"
+            },
+            "subContentId": "drag-3",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Definiert User Stories"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 19.2,
+          "y": 2.0,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "1"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Moderiert Retrospektive</p>"
+            },
+            "subContentId": "drag-4",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Moderiert Retrospektive"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 2.0,
+          "y": 4.8,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "2"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Schaetzt Aufwaende</p>"
+            },
+            "subContentId": "drag-5",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Schaetzt Aufwaende"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 6.3,
+          "y": 4.8,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "0"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Vertritt Kundenwuensche</p>"
+            },
+            "subContentId": "drag-6",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Vertritt Kundenwuensche"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 10.6,
+          "y": 4.8,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "1"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Schuetzt das Team</p>"
+            },
+            "subContentId": "drag-7",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Schuetzt das Team"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        },
+        {
+          "x": 14.9,
+          "y": 4.8,
+          "width": 3.5,
+          "height": 2,
+          "dropZones": [
+            "2"
+          ],
+          "type": {
+            "library": "H5P.AdvancedText 1.1",
+            "params": {
+              "text": "<p style='margin:0;font-size:11px;'>Testet die Software</p>"
+            },
+            "subContentId": "drag-8",
+            "metadata": {
+              "contentType": "Text",
+              "license": "U",
+              "title": "Testet die Software"
+            }
+          },
+          "backgroundOpacity": 100,
+          "multiple": false
+        }
+      ],
+      "dropZones": [
+        {
+          "x": 10,
+          "y": 80,
+          "width": 5,
+          "height": 6,
+          "correctElements": [
+            "0",
+            "3",
+            "6"
+          ],
+          "showLabel": true,
+          "backgroundOpacity": 100,
+          "tipsAndFeedback": {
+            "tip": ""
+          },
+          "single": false,
+          "autoAlign": true,
+          "label": "<div style='text-align:center;font-weight:bold;font-size:10px;background:#e3f2fd;border:2px dashed #888;border-radius:4px;'>Product Owner</div>"
+        },
+        {
+          "x": 45,
+          "y": 80,
+          "width": 5,
+          "height": 6,
+          "correctElements": [
+            "1",
+            "4",
+            "7"
+          ],
+          "showLabel": true,
+          "backgroundOpacity": 100,
+          "tipsAndFeedback": {
+            "tip": ""
+          },
+          "single": false,
+          "autoAlign": true,
+          "label": "<div style='text-align:center;font-weight:bold;font-size:10px;background:#fce4ec;border:2px dashed #888;border-radius:4px;'>Scrum Master</div>"
+        },
+        {
+          "x": 80,
+          "y": 80,
+          "width": 5,
+          "height": 6,
+          "correctElements": [
+            "2",
+            "5",
+            "8"
+          ],
+          "showLabel": true,
+          "backgroundOpacity": 100,
+          "tipsAndFeedback": {
+            "tip": ""
+          },
+          "single": false,
+          "autoAlign": true,
+          "label": "<div style='text-align:center;font-weight:bold;font-size:10px;background:#e8f5e9;border:2px dashed #888;border-radius:4px;'>Dev Team</div>"
+        }
+      ]
+    }
+  },
+  "overallFeedback": [
+    {
+      "from": 0,
+      "to": 50,
+      "feedback": "Nicht ganz - diskutiere mit einem Partner und versuche es nochmal!"
+    },
+    {
+      "from": 51,
+      "to": 80,
+      "feedback": "Fast! Ueberlege kreativ, was noch fehlen koennte."
+    },
+    {
+      "from": 81,
+      "to": 100,
+      "feedback": "Sehr gut! Du hast kritisch gedacht und die richtige Loesung gefunden."
+    }
+  ],
+  "behaviour": {
+    "enableRetry": true,
+    "enableCheckButton": true,
+    "showSolutionsRequiresInput": true,
+    "singlePoint": false,
+    "applyPenalties": false,
+    "enableScoreExplanation": true,
+    "dropZoneHighlighting": "always",
+    "autoAlignSpacing": 2,
+    "enableFullScreen": true,
+    "showScorePoints": true,
+    "showTitle": true
+  },
+  "grabbablePrefix": "Ziehbares Element {num}.",
+  "dropzonePrefix": "Dropzone {num}.",
+  "tipLabel": "Tipps anzeigen",
+  "correctAnswer": "Richtige Antwort",
+  "wrongAnswer": "Falsche Antwort",
+  "scoreBarLabel": "Du hast :num von :total Punkten",
+  "showSolution": "Lösung anzeigen",
+  "submit": "Absenden"
+}

@@ -1,0 +1,118 @@
+/*
+ * BS:WI Hamburg - H5P Corporate Design
+ *
+ * Farben:
+ *   Navy:      #003366 (Buttons, Navigation, Ueberschriften)
+ *   Lightblue: #00A3E0 (Links, Fortschrittsbalken, Akzente)
+ *   Yellow:    #B5E505 (Erfolg, Highlights)
+ *   Gray:      #333333 (Textfarbe)
+ *   LightGray: #F5F5F5 (Hintergruende)
+ */
+
+/* === Buttons === */
+.h5p-joubelui-button,
+.h5p-question-check-answer,
+.h5p-question-show-solution,
+.h5p-question-try-again {
+  background: #003366 !important;
+  border-radius: 4px !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.h5p-joubelui-button:hover,
+.h5p-question-check-answer:hover,
+.h5p-question-show-solution:hover,
+.h5p-question-try-again:hover {
+  background: #004080 !important;
+}
+
+.h5p-joubelui-button:active,
+.h5p-question-check-answer:active {
+  background: #002244 !important;
+}
+
+/* === Feedback === */
+.h5p-question-plus-one {
+  color: #B5E505 !important;
+}
+
+.h5p-joubelui-score-bar-full-score {
+  background: #B5E505 !important;
+}
+
+/* === Progress/Score === */
+.h5p-joubelui-progressbar .h5p-joubelui-progressbar-background {
+  background: #00A3E0 !important;
+}
+
+.h5p-joubelui-score-bar .h5p-joubelui-score-bar-star {
+  color: #B5E505 !important;
+}
+
+/* === Question Set === */
+.h5p-question-set .h5p-progress-dots .h5p-dot.h5p-answered {
+  background: #003366 !important;
+}
+
+.h5p-question-set .h5p-progress-dots .h5p-dot.h5p-current {
+  border-color: #00A3E0 !important;
+}
+
+/* === Interactive Book Navigation === */
+.h5p-interactive-book .h5p-interactive-book-navigation {
+  background: #003366 !important;
+}
+
+.h5p-interactive-book .h5p-interactive-book-navigation-chapter.h5p-interactive-book-navigation-current {
+  background: #004080 !important;
+}
+
+.h5p-interactive-book .h5p-interactive-book-status {
+  color: #003366 !important;
+}
+
+/* === Dialog Cards / Flashcards === */
+.h5p-dialogcards .h5p-dialogcards-card-content {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.h5p-dialogcards .h5p-dialogcards-turn {
+  background: #003366 !important;
+  color: #fff !important;
+}
+
+/* === MultiChoice === */
+.h5p-multichoice .h5p-answer.h5p-correct {
+  border-color: #B5E505 !important;
+}
+
+/* === Course Presentation === */
+.h5p-course-presentation .h5p-slide-header {
+  background: #003366 !important;
+}
+
+.h5p-course-presentation .h5p-element-button {
+  background: #003366 !important;
+  border-radius: 4px !important;
+}
+
+/* === True/False === */
+.h5p-true-false .h5p-true-false-answer.h5p-correct {
+  border-color: #B5E505 !important;
+}
+
+/* === Links / Akzente === */
+.h5p-content a {
+  color: #00A3E0 !important;
+}
+
+/* === Allgemeine Typografie === */
+.h5p-content {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333333;
+}
+
+.h5p-content h1, .h5p-content h2, .h5p-content h3 {
+  color: #003366;
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Scrum-Rollen zuordnen",
+  "language": "de",
+  "mainLibrary": "H5P.DragQuestion",
+  "embedTypes": [
+    "iframe"
+  ],
+  "license": "CC BY",
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.DragQuestion",
+      "majorVersion": 1,
+      "minorVersion": 14
+    },
+    {
+      "machineName": "H5P.AdvancedText",
+      "majorVersion": 1,
+      "minorVersion": 1
+    }
+  ]
+}

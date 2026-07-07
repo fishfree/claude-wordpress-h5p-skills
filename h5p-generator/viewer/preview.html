@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5P Preview: 02-scrum-rollen-v10</title>
+    <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@3.6.0/dist/main.bundle.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            max-width: 900px;
+            margin: 0 auto 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        #h5p-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .h5p-iframe-wrapper {
+            min-height: 500px;
+        }
+        .status {
+            max-width: 900px;
+            margin: 16px auto 0;
+            padding: 12px 16px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2e7d32;
+        }
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>02-scrum-rollen-v10</h1>
+        <div class="subtitle">H5P Preview - 02-scrum-rollen-v10.h5p</div>
+    </div>
+    <div id="h5p-container"></div>
+    <div class="status" id="status">Initializing...</div>
+
+    <script>
+        const el = document.getElementById('h5p-container');
+        const status = document.getElementById('status');
+
+        const options = {
+            h5pJsonPath: 'content',
+            frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.6.0/dist/frame.bundle.js',
+            frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.6.0/dist/styles/h5p.css',
+        };
+
+        status.textContent = 'Loading H5P content...';
+
+        new H5PStandalone.H5P(el, options)
+            .then(() => {
+                status.textContent = 'Content loaded successfully';
+            })
+            .catch(err => {
+                status.textContent = 'Error: ' + err.message;
+                status.classList.add('error');
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
