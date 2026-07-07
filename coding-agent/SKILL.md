@@ -1,12 +1,14 @@
 ---
-name: coding-agent
-description: Specialized coding agent with Context7 integration for documentation-aware code generation. Creates, refactors, and extends MCP servers and Node.js/Python projects with up-to-date library documentation.
+name: coding-workflow
+description: Code creation workflow with Context7 integration for documentation-aware code generation. Creates, refactors, and extends MCP servers and Node.js/Python projects with up-to-date library documentation.
+version: "2.0"
+date: 2026-03-12
 license: MIT
 ---
 
-# Coding Agent
+# Coding Workflow
 
-Specialized sub-agent for the DevOps Agent that handles code creation, refactoring, and extension with intelligent documentation lookup via Context7.
+Workflow for code creation, refactoring, and extension with intelligent documentation lookup via Context7.
 
 ## When to Use This Skill
 
@@ -230,36 +232,6 @@ const [courses, users] = await Promise.all([
 ]);
 ```
 
-## Integration with DevOps Agent
-
-### Handoff to Debug Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Coding Agent
-**To:** Debug Agent
-**Context:** New tool implemented, needs browser testing
-**Artifacts:**
-  - Tool: moodle_create_quiz
-  - Test URL: https://moodle.dirk-schulenburg.net
-**Task:** Verify quiz creation via UI
-```
-
-### Handoff to Documentation Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Coding Agent
-**To:** Documentation Agent
-**Context:** New tool ready for documentation
-**Artifacts:**
-  - Tool: moodle_create_quiz
-  - Source: mcp-servers/moodle-mcp/src/tools/moodle_create_quiz.mjs
-**Task:** Generate MCP tool documentation
-```
-
 ## Quick Reference
 
 ### Context7 Lookup Template
@@ -296,27 +268,4 @@ feat({server}): add {tool_name} tool
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | code:implement |
-| **Context** | tool_name, server, libraries_used, lines_of_code |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "code:implement",
-  "context": "{\"tool_name\": \"moodle_create_quiz\", \"server\": \"moodle-mcp\", \"libraries_used\": [\"zod\", \"express\"], \"lines_of_code\": 85}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Sub-Agent - Coding Agent v1.0*
+*Coding Workflow v2.0*

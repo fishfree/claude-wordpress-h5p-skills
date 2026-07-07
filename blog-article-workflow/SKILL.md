@@ -1,12 +1,12 @@
 ---
 name: blog-article-workflow
-description: Complete workflow for creating and publishing blog articles with Claude AI and WordPress MCP integration. Use when creating educational blog posts, tutorial articles, or documentation that needs to be published to WordPress.
+description: Complete workflow for creating and publishing blog articles to cannabis-kultur.online (EduGrow WordPress) with Claude AI and WordPress MCP integration. Use when creating educational blog posts, tutorial articles, or documentation that needs to be published to WordPress.
 license: MIT
 ---
 
 # Blog Article Creation Workflow
 
-Step-by-step workflow for creating high-quality blog articles from concept to publication, with WordPress automation via MCP.
+Step-by-step workflow for creating high-quality blog articles from concept to publication on **cannabis-kultur.online** (EduGrow WordPress), with WordPress automation via MCP.
 
 ## MCP Integration (WICHTIG)
 
@@ -601,15 +601,10 @@ python tools/wp-post-v2.py batch-upload --folder ./bilder/ --optimize
 - Include .h5p file uploads
 - Automate full publishing
 
-**With frontend-design:**
-- Create custom illustrations
-- Design infographics
-- Build interactive demos
-
-**With canvas-design:**
-- Create featured images
-- Design diagrams
-- Produce visual assets
+**With recherche-workflow:**
+- Research topics before writing
+- Gather well-substantiated sources
+- Build evidence-based articles
 
 ## Common Issues
 
@@ -634,27 +629,4 @@ python tools/wp-post-v2.py batch-upload --folder ./bilder/ --optimize
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | personal |
-| **Action** | blog:publish_article |
-| **Context** | title, post_id, word_count, featured_image_id |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "personal",
-  "action": "blog:publish_article",
-  "context": "{\"title\": \"H5P + WordPress Tutorial\", \"post_id\": 456, \"word_count\": 2100, \"featured_image_id\": 123}",
-  "result": "success"
-}
-```
-
----
-
-*Version 2.0 - Pexels API + Auto-Image Integration (15.02.2026)*
+*Version 2.1 - Clarify target WordPress, remove obsolete skill refs (2026-03-12)*

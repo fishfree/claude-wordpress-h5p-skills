@@ -350,7 +350,7 @@ create_interactive_video("Tutorial", "https://youtube.com/watch?v=...", interact
 
 ### v3.1 (2026-03-02)
 - **Essay:** Freitext-Aufgaben mit Keyword-basierter Bewertung (H5P.Essay 1.5)
-- **Sort Paragraphs:** Absaetze in richtige Reihenfolge bringen (H5P.SortParagraphs 1.3)
+- **Sort Paragraphs:** Absaetze in richtige Reihenfolge bringen (H5P.SortParagraphs 0.11)
 - **Branching Scenario:** Verzweigte Lernszenarien mit Text- und Frage-Nodes (H5P.BranchingScenario 1.8)
 - **Interactive Video:** Videos mit eingebetteten Aufgaben, YouTube + MP4 (H5P.InteractiveVideo 1.27)
 - **ScenarioAgent + MediaAgent:** Neue Sub-Agents fuer Szenarien und Video-Inhalte

@@ -120,40 +120,27 @@ Das Quiz kann jetzt in Moodle-Aktivitaeten eingebunden werden.
   ```
 
 ### Step 3: Create H5P
-```python
-from h5p_system import H5PSystem
-
-system = H5PSystem()
-result = system.generate_from_questions(
-    questions_text,
-    title=title,
-    domain=domain
-)
+```
+# h5p-generator Skill aufrufen
+# Generiert .h5p Datei aus den Fragen
+# Output: pfad/zur/datei.h5p
 ```
 
 ### Step 4: Upload to Moodle
-```python
-# Via Moodle MCP
-POST https://mcp-moodle.dirk-schulenburg.net/mcp
-Headers:
-  Content-Type: application/json
-  Accept: application/json, text/event-stream
-  x-api-key: {MCP_API_KEY}
+```
+# Via Moodle MCP Tool (automatisch verfuegbar)
+moodle_upload_h5p:
+  base64data: [BASE64_ENCODED_H5P]
+  filename: "quiz-titel.h5p"
+  title: "Quiz-Titel"
+  courseid: [KURS_ID]
 
-Body:
-{
-  "jsonrpc": "2.0",
-  "method": "tools/call",
-  "params": {
-    "name": "moodle_upload_h5p",
-    "arguments": {
-      "base64data": "{h5p_base64}",
-      "filename": "{filename}.h5p",
-      "title": "{title}",
-      "courseid": {course_id}
-    }
-  }
-}
+# Optional: Als Aktivitaet im Kurs einbinden
+moodle_create_h5p_activity:
+  courseid: [KURS_ID]
+  sectionnum: [ABSCHNITT]
+  contentid: [CONTENT_ID aus Upload]
+  name: "Quiz-Titel"
 ```
 
 ## Requirements
@@ -180,27 +167,4 @@ Kann kombiniert werden mit:
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | education |
-| **Action** | h5p:upload_to_moodle |
-| **Context** | topic, question_count, course_id, content_id |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "education",
-  "action": "h5p:upload_to_moodle",
-  "context": "{\"topic\": \"Bilanz\", \"question_count\": 10, \"course_id\": 2, \"content_id\": 27}",
-  "result": "success"
-}
-```
-
----
-
-*Skill fuer den Education Agent - Dirk als Lehrer an der BS:WI*
+*Education Skill — H5P Quiz to Moodle v1.1 (2026-03-12)*

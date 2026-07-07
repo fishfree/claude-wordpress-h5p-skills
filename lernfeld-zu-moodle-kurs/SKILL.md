@@ -13,6 +13,13 @@ allowed-tools:
   - moodle:moodle_create_label
   - moodle:moodle_create_url
   - moodle:moodle_create_folder
+  - moodle:moodle_create_quiz
+  - moodle:moodle_upload_h5p
+  - moodle:moodle_create_h5p_activity
+  - moodle:moodle_move_module
+  - moodle:moodle_reorder_modules
+  - moodle:moodle_bulk_add_questions
+  - moodle:moodle_import_gift
 ---
 
 # Lernfeld zu Moodle-Kurs
@@ -309,11 +316,15 @@ Diese Regel gilt für:
 - **Foren automatisch erstellen** (Moodle-API unterstützt das nicht)
 - **Assignments erstellen** (benötigt mod_assign Capability)
 - **Dateien hochladen** (benötigt separaten Upload-Workflow)
-- **Quiz/H5P erstellen** (siehe h5p-generator Skill)
+
+### Was jetzt moeglich ist (seit v1.1):
+- **Quiz erstellen** via `moodle_create_quiz` + `moodle_bulk_add_questions` / `moodle_import_gift`
+- **H5P hochladen** via `moodle_upload_h5p` + `moodle_create_h5p_activity`
+- **Module umsortieren** via `moodle_move_module` + `moodle_reorder_modules`
 
 ### Workarounds:
 - Foren: Manuell in Moodle erstellen oder Kurs-Template nutzen
-- Dateien: Über Moodle-UI oder WebDAV hochladen
+- Dateien: Ueber Moodle-UI oder WebDAV hochladen
 - Assignments: Manuell anlegen, Struktur als Vorlage nutzen
 
 ## Erweiterungen
@@ -343,27 +354,5 @@ Diese Regel gilt für:
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | education |
-| **Action** | moodle:create_lernfeld_course |
-| **Context** | lernfeld, course_id, section_count, activity_count |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "education",
-  "action": "moodle:create_lernfeld_course",
-  "context": "{\"lernfeld\": \"LF3\", \"course_id\": 6, \"section_count\": 9, \"activity_count\": 24}",
-  "result": "success"
-}
-```
-
----
-
+*Version 1.1 - Quiz/H5P/Reorder Support (2026-03-12)*
 *Skill basiert auf dem E-Commerce Lernfeld 3 Kurs (Kurs-ID 6) der BS:WI Hamburg.*

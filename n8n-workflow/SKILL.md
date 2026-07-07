@@ -37,6 +37,9 @@ The n8n MCP server provides these tools:
 | `n8n_validate_workflow` | Validate workflow structure |
 | `n8n_autofix_workflow` | Auto-fix common issues |
 | `n8n_trigger_webhook_workflow` | Trigger webhook workflow |
+| `n8n_workflow_versions` | Get workflow version history |
+| `n8n_health_check` | Check n8n instance health |
+| `n8n_diagnostic` | Run diagnostic checks on workflows |
 
 ### Access
 
@@ -464,27 +467,4 @@ n8n_get_execution({ id: "456", mode: "preview" })
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | n8n:manage_workflow |
-| **Context** | workflow_id, workflow_name, operation, node_count |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "n8n:manage_workflow",
-  "context": "{\"workflow_id\": \"123\", \"workflow_name\": \"Email Router\", \"operation\": \"create\", \"node_count\": 5}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Skill - n8n Workflow Management*
+*Version 1.1 - Added workflow_versions, health_check, diagnostic tools (2026-03-12)*

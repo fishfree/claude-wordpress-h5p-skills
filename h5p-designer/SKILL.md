@@ -194,29 +194,17 @@ h5p-designer/
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | education |
-| **Action** | h5p:design |
-| **Context** | h5p_file, content_type, issues_found, fixes_applied |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "education",
-  "action": "h5p:design",
-  "context": "{\"h5p_file\": \"scrum-rollen.h5p\", \"content_type\": \"DragQuestion\", \"issues_found\": 8, \"fixes_applied\": 2}",
-  "result": "success"
-}
-```
-
 ## Changelog
 
 | Version | Datum | Änderungen |
 |---------|-------|------------|
 | 1.0.0 | 2026-01-19 | Initial: DragQuestion Analyzer, Auto-Fix, Layout-Optimierung |
+| 1.0.1 | 2026-03-12 | Hinweis auf h5p-generator v3 Overlap |
+
+## Hinweis: Overlap mit h5p-generator v3
+
+Der `h5p-generator` Skill (v3.0+) hat eine eigene `verify_h5p()` Funktion mit Puppeteer-basierter visueller Verifikation. Dieser h5p-designer Skill ist spezialisiert auf **nachtraegliche Analyse und Reparatur** bestehender H5P-Dateien (insbesondere DragQuestion), waehrend h5p-generator sich auf die **Erstellung** konzentriert.
+
+**Wann welchen Skill:**
+- Neue H5P erstellen → `h5p-generator`
+- Bestehende H5P debuggen/optimieren → `h5p-designer`

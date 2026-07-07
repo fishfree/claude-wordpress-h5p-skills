@@ -31,7 +31,8 @@ WebFetch: URL + Prompt zur Inhaltsextraktion
 **IMMER die Tools nutzen - nicht nur dokumentieren, sondern aktiv suchen und fetchen!**
 
 **Ergebnisse speichern:**
-- Recherche-Notizen in `_DEV_DOCS/Recherche/[Thema]-Recherche.md`
+- Recherche-Notizen in `C:\Users\mail\entwicklung\_DEV_DOCS\_DEV_DOCS\Recherche\[Thema]-Recherche.md`
+- (Der alte Pfad `_DEV_DOCS/…` im Docker-Repo existiert NICHT mehr — ein PreToolUse-Hook blockt dort Schreibzugriffe.)
 - Format: Obsidian-kompatibles Markdown mit YAML-Frontmatter
 
 ---
@@ -345,27 +346,5 @@ WebSearch({ query: "[Thema] critique OR criticism site:academia.edu" })
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | personal |
-| **Action** | research:execute |
-| **Context** | topic, sources_count, perspectives_count, quality_score |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "personal",
-  "action": "research:execute",
-  "context": "{\"topic\": \"Dezentrale Koordination\", \"sources_count\": 12, \"perspectives_count\": 3, \"quality_score\": \"high\"}",
-  "result": "success"
-}
-```
-
----
-
+*Version 1.2 - Output-Pfad auf neuen Vault-Speicherort korrigiert (2026-06-24)*
 *Dieser Skill basiert auf den kuratierten Quellen in [[Newsquellen]] und [[feeds]].*

@@ -6,7 +6,7 @@ license: MIT
 
 # MCP Server Deployment Workflow
 
-Complete workflow for deploying MCP servers from local development to the Hetzner production server via Git and Docker.
+Complete workflow for deploying MCP servers from local development to the Hetzner production server.
 
 ## When to Use This Skill
 
@@ -19,125 +19,141 @@ Use this skill when:
 ## Prerequisites
 
 ### Local Environment
-- Git repository: `C:\Users\mail\entwicklung\docker\mcp-servers\{server-name}`
-- SSH key: `C:\Users\mail\.ssh\hetzner_ssh_key`
+- Git repository: `C:\Users\mail\entwicklung\docker\`
+- SSH key: `~/.ssh/hetzner_ssh_key`
 
 ### Server Environment
 - **Host:** 95.217.163.192 (Hetzner)
 - **User:** dirk
-- **Path:** `/home/dirk/docker/mcp-servers/{server-name}`
-- **Traefik:** Reverse proxy with auto-SSL
+- **Base Path:** `/home/dirk/docker/`
+- **Traefik:** Reverse proxy with auto-SSL (HTTP challenge)
 
-### MCP Servers
+## MCP Servers
 
-| Server | Local Port | Domain | Repo Path |
-|--------|------------|--------|-----------|
-| wp-mcp | 8000 | mcp-wp.dirk-schulenburg.net | mcp-servers/wp-mcp |
-| moodle-mcp | 8001 | mcp-moodle.dirk-schulenburg.net | mcp-servers/moodle-mcp |
-| imap-mcp | 8002 | mcp-imap.dirk-schulenburg.net | mcp-servers/imap-mcp |
+| Server | Domain | Local Path | Deploy Type |
+|--------|--------|------------|-------------|
+| moodle-mcp | mcp-moodle.dirk-schulenburg.net | mcp-servers/moodle-mcp | **Submodule** (eigenes Git-Repo) |
+| wp-mcp | mcp-wp.dirk-schulenburg.net | mcp-servers/wp-mcp | **Submodule** (eigenes Git-Repo) |
+| imap-mcp | mcp-imap.dirk-schulenburg.net | (root compose) | Parent Repo |
+| edugrow-mcp | mcp-edugrow.dirk-schulenburg.net | edugrow/infrastructure/ | Parent Repo |
+| sharepoint-mcp | mcp-sharepoint.dirk-schulenburg.net | mcp-servers/sharepoint-mcp | Parent Repo |
+| teams-mcp | mcp-teams.dirk-schulenburg.net | mcp-servers/teams-mcp | Parent Repo |
+| ms365-admin-mcp | mcp-ms365.dirk-schulenburg.net | mcp-servers/ms365-admin-mcp | Parent Repo |
+| voice-mcp | voice-mcp.dirk-schulenburg.net | (root compose) | Parent Repo |
 
-## Quick Deploy
+## Deploy Patterns
 
-### One-Liner Deployment
+### Pattern 1: Submodule-Server (moodle-mcp, wp-mcp)
 
-```bash
-# WordPress MCP
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 \
-  'cd /home/dirk/docker/mcp-servers/wp-mcp && git pull && docker compose down && docker compose up -d --build'
-
-# Moodle MCP
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 \
-  'cd /home/dirk/docker/mcp-servers/moodle-mcp && git pull && docker compose down && docker compose up -d --build'
-
-# IMAP MCP
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 \
-  'cd /home/dirk/docker/mcp-servers/imap-mcp && git pull && docker compose down && docker compose up -d --build'
-```
-
-## Full Deployment Workflow
-
-### Phase 1: Local Development
+**WICHTIG:** Submodules haben eigene Git-Repos. Zwei Commits noetig!
 
 ```bash
-# 1. Navigate to project
-cd C:\Users\mail\entwicklung\docker\mcp-servers\{server-name}
-
-# 2. Make changes to code
-# Edit src/server.mjs, etc.
-
-# 3. Local testing
-docker compose up --build
-
-# 4. Test endpoint
-curl http://localhost:8000/health
-```
-
-### Phase 2: Git Commit & Push
-
-```bash
-# 1. Stage changes
+# 1. Im Submodule committen + pushen
+cd C:\Users\mail\entwicklung\docker\mcp-servers\moodle-mcp
 git add .
-
-# 2. Commit with descriptive message
-git commit -m "feat: add new tool moodle_create_quiz"
-
-# 3. Push to remote
+git commit -m "feat: add new tool"
 git push origin master
+
+# 2. Im Parent-Repo die Referenz aktualisieren
+cd C:\Users\mail\entwicklung\docker
+git add mcp-servers/moodle-mcp
+git commit -m "chore: update moodle-mcp submodule"
+git push
+
+# 3. Auf Server deployen
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker/mcp-servers/moodle-mcp
+  git pull origin master
+  docker compose up -d --build
+'
 ```
 
-### Phase 3: Server Deployment
+### Pattern 2: Parent-Repo-Server (sharepoint, teams, ms365, imap)
 
 ```bash
-# 1. SSH to server
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192
+# 1. Lokal committen + pushen
+cd C:\Users\mail\entwicklung\docker
+git add mcp-servers/sharepoint-mcp/
+git commit -m "feat(sharepoint-mcp): add new tool"
+git push
 
-# 2. Navigate to MCP server directory
-cd /home/dirk/docker/mcp-servers/{server-name}
-
-# 3. Pull latest code
-git pull origin master
-
-# 4. Rebuild and restart container
-docker compose down
-docker compose up -d --build
+# 2. Auf Server deployen
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  git pull
+  cd mcp-servers/sharepoint-mcp
+  docker compose up -d --build
+'
 ```
 
-### Phase 4: Verification
+### Pattern 3: Root-Compose-Server (imap, voice)
 
 ```bash
-# 1. Check container status
-docker ps | grep mcp
+# Compose-File liegt im Root, nicht im mcp-servers/ Ordner
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  git pull
+  docker compose -f docker-compose-imap-mcp.yml up -d --build
+'
+```
 
-# 2. Health check
-curl https://mcp-{name}.dirk-schulenburg.net/health
+### Pattern 4: SCP-Deploy (Website — KEIN Git-Repo auf Server!)
 
-# 3. View logs (if issues)
-docker logs mcp-{name}-1 --tail 100
+```bash
+# WICHTIG: /home/dirk/docker/website/ ist KEIN Git-Repo
+# Deploy-Reihenfolge KRITISCH: Erst SCP, DANN rebuild!
 
-# 4. Test MCP call (from Claude)
-# Use the MCP tool to verify functionality
+# 1. Dateien hochladen
+scp -i ~/.ssh/hetzner_ssh_key -r ./website/* dirk@95.217.163.192:/home/dirk/docker/website/
+
+# 2. Container rebuilden
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker/website
+  docker compose up -d --build
+'
+```
+
+## Deploy Script
+
+Das `deploy.sh` Script auf dem Server vereinfacht den Prozess:
+
+```bash
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '/home/dirk/docker/deploy.sh {server-name}'
+```
+
+## Verification
+
+### Health Check (nach Deploy)
+
+```bash
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  echo "=== Container Status ==="
+  docker ps -f name={container-name} --format "{{.Names}}: {{.Status}}"
+
+  echo "=== Health Check ==="
+  curl -sf https://mcp-{name}.dirk-schulenburg.net/health && echo " OK" || echo " FAIL"
+
+  echo "=== Recent Logs ==="
+  docker logs {container-name} --tail 20
+'
+```
+
+### All MCP Health Checks
+
+```bash
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  for svc in mcp-moodle mcp-wp mcp-edugrow mcp-imap mcp-sharepoint mcp-teams mcp-ms365; do
+    status=$(curl -sf https://${svc}.dirk-schulenburg.net/health 2>/dev/null && echo "OK" || echo "FAIL")
+    echo "  $svc: $status"
+  done
+'
 ```
 
 ## New MCP Server Setup
 
-### Step 1: Create Local Structure
-
-```
-mcp-servers/{new-server}/
-├── src/
-│   ├── server.mjs
-│   ├── config.mjs
-│   └── tools/
-├── Dockerfile
-├── docker-compose.yml
-├── package.json
-└── .env
-```
-
-### Step 2: Docker Compose Template
+### Docker Compose Template
 
 ```yaml
-version: '3.8'
 services:
   {server-name}:
     build: .
@@ -148,103 +164,56 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.{server-name}.rule=Host(`mcp-{short}.dirk-schulenburg.net`)"
-      - "traefik.http.routers.{server-name}.entrypoints=websecure"
+      - "traefik.http.routers.{server-name}.entrypoints=https"
+      - "traefik.http.routers.{server-name}.tls=true"
       - "traefik.http.routers.{server-name}.tls.certresolver=letsencrypt"
       - "traefik.http.services.{server-name}.loadbalancer.server.port=8000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
 networks:
   proxy:
     external: true
 ```
 
-### Step 3: Dockerfile Template
+### Dockerfile Template (Security-Hardened)
 
 ```dockerfile
 FROM node:20-alpine
 
+# Non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 COPY . .
 
+USER appuser
 EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD wget -qO- http://localhost:8000/health || exit 1
 
 CMD ["node", "src/server.mjs"]
 ```
 
-### Step 4: Initialize Git & Deploy
+## Rollback
 
 ```bash
-# Local
-cd C:\Users\mail\entwicklung\docker\mcp-servers\{new-server}
-git init
-git add .
-git commit -m "initial: {server-name} MCP server"
-git remote add origin git@github.com:dSchulenburg/{repo-name}.git
-git push -u origin master
-
-# Server
-ssh dirk@95.217.163.192
-cd /home/dirk/docker/mcp-servers
-git clone git@github.com:dSchulenburg/{repo-name}.git {new-server}
-cd {new-server}
-# Create .env with secrets
-docker compose up -d --build
-```
-
-## Rollback Procedure
-
-### Quick Rollback
-
-```bash
-# 1. SSH to server
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192
-
-# 2. Navigate and rollback
-cd /home/dirk/docker/mcp-servers/{server-name}
-git log --oneline -5  # Find commit to rollback to
-git checkout {commit-hash}
-
-# 3. Rebuild
-docker compose down && docker compose up -d --build
-```
-
-### Restore from Backup
-
-```bash
-# 1. Check backup
-ls -la /mnt/backup/mcp-servers/
-
-# 2. Restore if needed
-cp -r /mnt/backup/mcp-servers/{server-name} /home/dirk/docker/mcp-servers/
-
-# 3. Rebuild
-cd /home/dirk/docker/mcp-servers/{server-name}
-docker compose up -d --build
-```
-
-## Health Checks
-
-### All MCP Servers
-
-```bash
-# Check all at once
-curl -s https://mcp-wp.dirk-schulenburg.net/health && echo " - wp-mcp OK"
-curl -s https://mcp-moodle.dirk-schulenburg.net/health && echo " - moodle-mcp OK"
-curl -s https://mcp-imap.dirk-schulenburg.net/health && echo " - imap-mcp OK"
-```
-
-### Detailed Status
-
-```bash
-# Container status
-docker ps --filter "name=mcp" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-
-# Resource usage
-docker stats --no-stream --filter "name=mcp"
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker/mcp-servers/{server-name}
+  git log --oneline -5
+  git checkout {commit-hash}
+  docker compose up -d --build
+'
 ```
 
 ## Troubleshooting
@@ -252,103 +221,34 @@ docker stats --no-stream --filter "name=mcp"
 ### Container Won't Start
 
 ```bash
-# Check logs
-docker logs mcp-{name}-1 --tail 100
-
-# Check compose file
+docker logs {container-name} --tail 100
 docker compose config
-
-# Rebuild without cache
-docker compose build --no-cache
-docker compose up -d
+docker compose build --no-cache && docker compose up -d
 ```
 
 ### Health Check Fails
 
 ```bash
-# Test internal port
-docker exec mcp-{name}-1 curl -s localhost:8000/health
+# Internal test
+docker exec {container-name} wget -qO- http://localhost:8000/health
 
 # Check Traefik routing
-docker logs traefik --tail 50 | grep mcp
+docker logs traefik --tail 50 | grep {server-name}
 
-# Verify DNS
+# DNS check
 nslookup mcp-{name}.dirk-schulenburg.net
 ```
 
-### Git Conflicts
+## Multi-Key Auth
 
-```bash
-# Force pull (discard local changes on server)
-git fetch origin
-git reset --hard origin/master
-docker compose down && docker compose up -d --build
-```
-
-## Environment Variables
-
-### Required .env Variables
+Moodle-MCP und SharePoint-MCP unterstuetzen Multi-Key Auth fuer Kollegen-Zugriff:
 
 ```env
-# Common
-PORT=8000
-NODE_ENV=production
-MCP_API_KEY=your-api-key
-
-# wp-mcp specific
-WP_URL=https://www.dirk-schulenburg.net
-WP_USERNAME=username
-WP_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
-
-# moodle-mcp specific
-MOODLE_URL=https://moodle.dirk-schulenburg.net
-MOODLE_TOKEN=your-token
-
-# imap-mcp specific
-IMAP_HOST=imap.example.com
-IMAP_USER=user@example.com
-IMAP_PASSWORD=password
+MCP_API_KEYS=key1:user1,key2:user2
 ```
 
-## Commit Message Convention
-
-```
-feat: add new feature
-fix: bug fix
-docs: documentation only
-refactor: code refactoring
-test: adding tests
-chore: maintenance
-```
-
-Examples:
-- `feat: add moodle_create_quiz tool`
-- `fix: handle empty response in wp_list_posts`
-- `refactor: extract validation logic`
+Doku: `_DEV_DOCS/MCP/MCP-Zugriff-fuer-Kollegen.md`
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | deploy:mcp_server |
-| **Context** | server_name, version, health_status |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "deploy:mcp_server",
-  "context": "{\"server_name\": \"wp-mcp\", \"version\": \"1.2.0\", \"health_status\": \"OK\"}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Skill - MCP Server Deployment*
+*DevOps Skill - MCP Server Deployment v2.0 (2026-03-12)*

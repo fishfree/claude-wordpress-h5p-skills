@@ -1,12 +1,14 @@
 ---
-name: documentation-agent
-description: Specialized documentation agent for generating, maintaining, and organizing technical documentation. Creates MCP tool docs, API references, session logs, and architecture documentation in Obsidian vault.
+name: documentation-workflow
+description: Documentation workflow for generating, maintaining, and organizing technical documentation. Creates MCP tool docs, API references, session logs, and architecture documentation in Obsidian vault.
+version: "2.0"
+date: 2026-03-12
 license: MIT
 ---
 
-# Documentation Agent
+# Documentation Workflow
 
-Specialized sub-agent for the DevOps Agent that handles all documentation tasks including MCP tool documentation, API references, session logging, and architecture updates.
+Workflow for all documentation tasks including MCP tool documentation, API references, session logging, and architecture updates.
 
 ## When to Use This Skill
 
@@ -24,9 +26,9 @@ Use this skill when:
 
 | Type | Location | Format |
 |------|----------|--------|
-| **MCP Tool Docs** | `_DEV_DOCS/MCP/{server}.md` | Obsidian MD |
-| **Session Logs** | `_DEV_DOCS/Sessions/YYYY-MM-DD_{topic}.md` | Obsidian MD |
-| **Architecture** | `_DEV_DOCS/Architektur/*.md` | Obsidian MD |
+| **MCP Tool Docs** | `C:\Users\mail\entwicklung\_DEV_DOCS\_DEV_DOCS\MCP\{server}.md` | Obsidian MD |
+| **Session Logs** | `C:\Users\mail\entwicklung\_DEV_DOCS\_DEV_DOCS\Sessions\YYYY-MM-DD_{topic}.md` | Obsidian MD |
+| **Architecture** | `C:\Users\mail\entwicklung\_DEV_DOCS\_DEV_DOCS\Architektur\*.md` | Obsidian MD |
 | **Skills** | `docker/claude-skills/{skill}/SKILL.md` | Claude Skill |
 | **READMEs** | Project root `README.md` | GitHub MD |
 
@@ -47,7 +49,7 @@ All templates follow consistent frontmatter and structure.
 - [ ] Error cases
 - [ ] API dependencies (Moodle/WordPress function)
 - [ ] Example usage
-- [ ] Test results (from Debug Agent)
+- [ ] Test results (from debug workflow)
 ```
 
 ### Phase 2: Update MCP Server Documentation
@@ -145,7 +147,7 @@ tags:
   - {category}
 related:
   - "[[MCP/{server}]]"
-  - "[[Architektur/Agent-DevOps]]"
+  - "[[Architektur/Infrastructure]]"
 ---
 
 # {Topic} Session
@@ -154,7 +156,7 @@ related:
 
 **Ziel:** {Was sollte erreicht werden}
 **Dauer:** {ca. X Stunden}
-**Beteiligte Agents:** {DevOps, Coding, Debug}
+**Workflows:** {Coding, Debug, Documentation}
 
 ## Problem
 
@@ -202,19 +204,18 @@ related:
 
 ### When to Update
 
-- New agent/sub-agent added
 - New MCP server deployed
-- Workflow changes
+- New skill/workflow added
 - Service configuration changes
+- Infrastructure changes
 
 ### Files to Update
 
 | Change Type | Files to Update |
 |-------------|-----------------|
-| New Sub-Agent | `Agent-DevOps.md`, `Agent-Architektur.md` |
-| New MCP Server | `Shared-Services.md`, `CLAUDE.md` |
-| New Skill | `Skill-Übersicht.md`, Agent doc |
-| Routing Change | `Routing-Regeln.md` |
+| New MCP Server | `CLAUDE.md`, `MEMORY.md` |
+| New Skill | `CLAUDE.md` (Skills table) |
+| Infrastructure | `CLAUDE.md` (Services table) |
 
 ### Architecture Update Template
 
@@ -223,7 +224,7 @@ related:
 
 | Datum | Änderung |
 |-------|----------|
-| {YYYY-MM-DD} | {Sub-Agent Name} hinzugefügt: {Kurzbeschreibung} |
+| {YYYY-MM-DD} | {Skill/Service Name} hinzugefügt: {Kurzbeschreibung} |
 ```
 
 ## README Generation
@@ -287,7 +288,7 @@ MIT
 ```markdown
 # Internal links (Obsidian wiki-style)
 [[MCP/Moodle]]
-[[Architektur/Agent-DevOps]]
+[[Architektur/Infrastructure]]
 [[Skills/Skill-mcp-server-deploy]]
 
 # With display text
@@ -300,40 +301,6 @@ MIT
 # Relative links for READMEs
 [MCP Server Deploy](./claude-skills/mcp-server-deploy/SKILL.md)
 [Moodle MCP](./mcp-servers/moodle-mcp/)
-```
-
-## Integration with Other Agents
-
-### Handoff from Coding Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Coding Agent
-**To:** Documentation Agent
-**Context:** New tool implemented
-**Artifacts:**
-  - Source: mcp-servers/moodle-mcp/src/tools/moodle_create_quiz.mjs
-  - Schema: Zod validation schema
-**Task:** Generate MCP tool documentation
-```
-
-### Handoff from Debug Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Debug Agent
-**To:** Documentation Agent
-**Context:** Testing complete
-**Artifacts:**
-  - Screenshots: debug-session/*.png
-  - Test results: All tests passed
-  - Bug fixes: Fixed permission issue
-**Task:**
-  1. Document test procedure
-  2. Add error handling section
-  3. Create session log for debugging
 ```
 
 ## Quick Reference
@@ -363,7 +330,6 @@ title: {Title}
 date: {YYYY-MM-DD}
 status: aktiv|draft|archiviert
 version: "{X.Y}"  # for skills
-agent: DevOps|Education|Personal  # for skills
 tags:
   - {tag1}
   - {tag2}
@@ -378,34 +344,10 @@ related:
 |-----|---------|
 | `mcp` | MCP server documentation |
 | `sessions` | Session logs |
-| `agents` | Agent documentation |
-| `skills` | Skill documentation |
+| `skills` | Skill/workflow documentation |
 | `infrastructure` | Server/Docker docs |
 | `reference` | Quick reference docs |
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | docs:generate |
-| **Context** | doc_type, target_file, sections_updated |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "docs:generate",
-  "context": "{\"doc_type\": \"mcp_tool\", \"target_file\": \"MCP/Moodle.md\", \"sections_updated\": [\"moodle_create_quiz\", \"Changelog\"]}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Sub-Agent - Documentation Agent v1.0*
+*Documentation Workflow v2.0*

@@ -1,12 +1,14 @@
 ---
-name: debug-agent
-description: Specialized debugging agent with Playwright browser automation for end-to-end testing, visual verification, and interactive debugging of web applications and MCP tools.
+name: debug-workflow
+description: Debugging workflow with Playwright browser automation for end-to-end testing, visual verification, and interactive debugging of web applications and MCP tools.
+version: "2.0"
+date: 2026-03-12
 license: MIT
 ---
 
-# Debug Agent
+# Debug Workflow
 
-Specialized sub-agent for the DevOps Agent that handles browser-based debugging, end-to-end testing, and visual verification using Playwright.
+Workflow for browser-based debugging, end-to-end testing, and visual verification using Playwright.
 
 ## When to Use This Skill
 
@@ -24,16 +26,16 @@ Use this skill when:
 Use the MCP browser tools (Playwright-based) for all browser interactions:
 
 ```javascript
-// Available tools via MCP
-browser_navigate     // Go to URL
-browser_snapshot     // Get accessibility tree (preferred)
-browser_click        // Click elements
-browser_type         // Type text
-browser_fill_form    // Fill multiple fields
-browser_take_screenshot  // Visual capture
-browser_wait_for     // Wait for text/conditions
-browser_console_messages // Check for JS errors
-browser_network_requests // Monitor API calls
+// Available tools via MCP (prefixed with mcp__MCP_DOCKER__)
+mcp__MCP_DOCKER__browser_navigate     // Go to URL
+mcp__MCP_DOCKER__browser_snapshot     // Get accessibility tree (preferred)
+mcp__MCP_DOCKER__browser_click        // Click elements
+mcp__MCP_DOCKER__browser_type         // Type text
+mcp__MCP_DOCKER__browser_fill_form    // Fill multiple fields
+mcp__MCP_DOCKER__browser_take_screenshot  // Visual capture
+mcp__MCP_DOCKER__browser_wait_for     // Wait for text/conditions
+mcp__MCP_DOCKER__browser_console_messages // Check for JS errors
+mcp__MCP_DOCKER__browser_network_requests // Monitor API calls
 ```
 
 ## Workflow: Debug MCP Tool via UI
@@ -53,26 +55,23 @@ browser_network_requests // Monitor API calls
 
 ```javascript
 // 1. Navigate to Moodle course
-browser_navigate({ url: "https://moodle.dirk-schulenburg.net/course/view.php?id=8" })
+mcp__MCP_DOCKER__browser_navigate({ url: "https://moodle.dirk-schulenburg.net/course/view.php?id=8" })
 
 // 2. Get page structure
-browser_snapshot()
+mcp__MCP_DOCKER__browser_snapshot()
 
-// 3. Find the quiz element
-browser_find({ query: "quiz", tabId: currentTab })
-
-// 4. Take screenshot as evidence
-browser_take_screenshot({ filename: "quiz-created.png" })
+// 3. Take screenshot as evidence
+mcp__MCP_DOCKER__browser_take_screenshot({ filename: "quiz-created.png" })
 ```
 
 ### Phase 3: Check for Errors
 
 ```javascript
 // Check browser console for JS errors
-browser_console_messages({ onlyErrors: true })
+mcp__MCP_DOCKER__browser_console_messages({ onlyErrors: true })
 
 // Check network requests for failed API calls
-browser_network_requests({ urlPattern: "webservice" })
+mcp__MCP_DOCKER__browser_network_requests({ urlPattern: "webservice" })
 ```
 
 ## Debugging Scenarios
@@ -87,14 +86,14 @@ browser_network_requests({ urlPattern: "webservice" })
    - Note: quizId, cmid values
 
 2. **Check Direct URL**
-   browser_navigate({ url: "https://moodle.dirk-schulenburg.net/mod/quiz/view.php?id={cmid}" })
+   mcp__MCP_DOCKER__browser_navigate({ url: "https://moodle.dirk-schulenburg.net/mod/quiz/view.php?id={cmid}" })
    - If works: Quiz exists but not visible in course
    - If 404: Quiz creation failed silently
 
 3. **Check Course Edit Mode**
    - Some items only visible in edit mode
-   browser_click({ ref: "edit-mode-toggle" })
-   browser_snapshot()
+   mcp__MCP_DOCKER__browser_click({ ref: "edit-mode-toggle" })
+   mcp__MCP_DOCKER__browser_snapshot()
 
 4. **Check User Permissions**
    - API user might see different than admin
@@ -107,17 +106,17 @@ browser_network_requests({ urlPattern: "webservice" })
 ## Debug Steps
 
 1. **Take Full Page Screenshot**
-   browser_take_screenshot({ fullPage: true, filename: "layout-bug.png" })
+   mcp__MCP_DOCKER__browser_take_screenshot({ fullPage: true, filename: "layout-bug.png" })
 
 2. **Inspect Element**
-   browser_snapshot({ ref_id: "problematic-element" })
+   mcp__MCP_DOCKER__browser_snapshot({ ref_id: "problematic-element" })
 
 3. **Check Responsive Behavior**
-   browser_resize({ width: 768, height: 1024 })
-   browser_take_screenshot({ filename: "tablet-view.png" })
+   mcp__MCP_DOCKER__browser_resize({ width: 768, height: 1024 })
+   mcp__MCP_DOCKER__browser_take_screenshot({ filename: "tablet-view.png" })
 
 4. **Check CSS Console Errors**
-   browser_console_messages({ pattern: "CSS" })
+   mcp__MCP_DOCKER__browser_console_messages({ pattern: "CSS" })
 ```
 
 ### Scenario 3: Form Submission Failure
@@ -126,7 +125,7 @@ browser_network_requests({ urlPattern: "webservice" })
 ## Debug Steps
 
 1. **Fill Form Step by Step**
-   browser_fill_form({
+   mcp__MCP_DOCKER__browser_fill_form({
      fields: [
        { name: "Quiz Name", type: "textbox", ref: "input-name", value: "Test Quiz" },
        { name: "Time Limit", type: "textbox", ref: "input-time", value: "60" }
@@ -134,18 +133,17 @@ browser_network_requests({ urlPattern: "webservice" })
    })
 
 2. **Monitor Network on Submit**
-   browser_network_requests()  // Clear first
+   mcp__MCP_DOCKER__browser_network_requests()  // Clear first
 
 3. **Click Submit**
-   browser_click({ ref: "submit-button" })
-   browser_wait_for({ time: 3 })
+   mcp__MCP_DOCKER__browser_click({ ref: "submit-button" })
+   mcp__MCP_DOCKER__browser_wait_for({ time: 3 })
 
 4. **Check Network Response**
-   browser_network_requests({ urlPattern: "quiz" })
+   mcp__MCP_DOCKER__browser_network_requests({ urlPattern: "quiz" })
 
 5. **Check for Error Messages**
-   browser_snapshot()
-   browser_find({ query: "error" })
+   mcp__MCP_DOCKER__browser_snapshot()
 ```
 
 ## Testing MCP Servers
@@ -158,12 +156,12 @@ browser_network_requests({ urlPattern: "webservice" })
 // Result: { postId: 123, url: "https://..." }
 
 // 2. Verify in browser
-browser_navigate({ url: "https://www.dirk-schulenburg.net/wp-admin/post.php?post=123&action=edit" })
-browser_snapshot()
+mcp__MCP_DOCKER__browser_navigate({ url: "https://cannabis-kultur.online/wp-admin/post.php?post=123&action=edit" })
+mcp__MCP_DOCKER__browser_snapshot()
 
 // 3. Check frontend
-browser_navigate({ url: "https://www.dirk-schulenburg.net/?p=123" })
-browser_take_screenshot({ filename: "new-post-frontend.png" })
+mcp__MCP_DOCKER__browser_navigate({ url: "https://cannabis-kultur.online/?p=123" })
+mcp__MCP_DOCKER__browser_take_screenshot({ filename: "new-post-frontend.png" })
 ```
 
 ### Moodle MCP Testing
@@ -174,15 +172,14 @@ browser_take_screenshot({ filename: "new-post-frontend.png" })
 // Result: { sectionId: 5 }
 
 // 2. Navigate to course
-browser_navigate({ url: "https://moodle.dirk-schulenburg.net/course/view.php?id=8" })
+mcp__MCP_DOCKER__browser_navigate({ url: "https://moodle.dirk-schulenburg.net/course/view.php?id=8" })
 
 // 3. Verify section exists
-browser_find({ query: "Section 5" })
-browser_snapshot()
+mcp__MCP_DOCKER__browser_snapshot()
 
 // 4. Check section content
-browser_click({ ref: "section-5-toggle" })
-browser_take_screenshot({ filename: "section-5-content.png" })
+mcp__MCP_DOCKER__browser_click({ ref: "section-5-toggle" })
+mcp__MCP_DOCKER__browser_take_screenshot({ filename: "section-5-content.png" })
 ```
 
 ### n8n Workflow Testing
@@ -190,19 +187,18 @@ browser_take_screenshot({ filename: "section-5-content.png" })
 ```javascript
 // Test workflow execution via UI
 // 1. Navigate to n8n
-browser_navigate({ url: "https://n8n.dirk-schulenburg.net" })
+mcp__MCP_DOCKER__browser_navigate({ url: "https://n8n.dirk-schulenburg.net" })
 
 // 2. Find workflow
-browser_find({ query: "Email Router" })
-browser_click({ ref: "workflow-email-router" })
+mcp__MCP_DOCKER__browser_snapshot()
+mcp__MCP_DOCKER__browser_click({ ref: "workflow-email-router" })
 
 // 3. Check execution history
-browser_click({ ref: "executions-tab" })
-browser_snapshot()
+mcp__MCP_DOCKER__browser_click({ ref: "executions-tab" })
+mcp__MCP_DOCKER__browser_snapshot()
 
 // 4. Check for errors
-browser_find({ query: "error" })
-browser_take_screenshot({ filename: "n8n-execution-log.png" })
+mcp__MCP_DOCKER__browser_take_screenshot({ filename: "n8n-execution-log.png" })
 ```
 
 ## Error Documentation
@@ -251,36 +247,6 @@ Quiz not visible. Direct URL returns 404.
 
 ### Root Cause
 Missing capability: moodle/quiz:addinstance for webservice user
-```
-
-## Integration with Other Agents
-
-### Handoff from Coding Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Coding Agent
-**To:** Debug Agent
-**Context:** New tool implemented
-**Artifacts:**
-  - Tool: moodle_create_quiz
-  - Expected: Quiz in course section
-**Task:** Verify via UI
-```
-
-### Handoff to Documentation Agent
-
-```markdown
-## Agent-Handoff
-
-**From:** Debug Agent
-**To:** Documentation Agent
-**Context:** Testing complete with screenshots
-**Artifacts:**
-  - Screenshots: debug-session/*.png
-  - Test results: PASS/FAIL
-**Task:** Document test results and usage examples
 ```
 
 ## Quick Reference
@@ -337,27 +303,4 @@ ref: "execute-workflow", "executions-tab", "execution-{id}"
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | debug:test |
-| **Context** | tool_under_test, target_url, screenshots_taken, issues_found |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "debug:test",
-  "context": "{\"tool_under_test\": \"moodle_create_quiz\", \"target_url\": \"moodle.dirk-schulenburg.net\", \"screenshots_taken\": 3, \"issues_found\": 1}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Sub-Agent - Debug Agent v1.0*
+*Debug Workflow v2.0*

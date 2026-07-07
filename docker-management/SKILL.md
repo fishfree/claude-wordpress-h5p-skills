@@ -22,11 +22,7 @@ Use this skill when:
 ### SSH Access
 
 ```bash
-# SSH Command
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192
-
-# Or with alias (if configured)
-ssh hetzner
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192
 ```
 
 ### Server Details
@@ -37,40 +33,81 @@ ssh hetzner
 | **User** | dirk |
 | **OS** | Ubuntu LTS 24 |
 | **Docker** | Docker Compose v2 |
+| **Base Dir** | /home/dirk/docker/ |
 
 ## Container Overview
 
-### Running Services
+### Application Services
 
-| Container | Service | Port | Domain |
-|-----------|---------|------|--------|
-| traefik | Reverse Proxy | 80, 443 | - |
-| n8n | Workflow Automation | 5678 | n8n.dirk-schulenburg.net |
-| wordpress | Blog/CMS | - | www.dirk-schulenburg.net |
-| moodle | LMS | - | moodle.dirk-schulenburg.net |
-| moodle-db | MariaDB | 3306 | - |
-| n8n-postgres | PostgreSQL | 5432 | - |
-| wp-mcp | WordPress MCP | 8000 | mcp-wp.dirk-schulenburg.net |
-| moodle-mcp | Moodle MCP | 8001 | mcp-moodle.dirk-schulenburg.net |
-| imap-mcp | IMAP MCP | 8002 | mcp-imap.dirk-schulenburg.net |
+| Container | Service | Domain | Compose File |
+|-----------|---------|--------|-------------|
+| traefik | Reverse Proxy + Let's Encrypt | traefik.dirk-schulenburg.net | docker-compose-traefik.yml |
+| n8n | Workflow Automation | n8n.dirk-schulenburg.net | docker-compose-n8n.yml |
+| moodle | LMS (moodlehq 5.0) | moodle.dirk-schulenburg.net | moodle/docker-compose-official.yml |
+| hedgedoc | Markdown-Editor (reveal.js) | codimd.dirk-schulenburg.net | docker-compose-hedgedoc.yml |
+| edugrow-wordpress | EduGrow CMS (Headless) | wp-admin.cannabis-kultur.online | edugrow/infrastructure/docker-compose-edugrow-wordpress.yml |
+| cannabis-kultur-frontend | EduGrow Next.js | cannabis-kultur.online | edugrow/infrastructure/docker-compose-edugrow-frontend.yml |
+| cccs-tool | Cannabis Chemovar Classification | cccs.cannabis-kultur.online | docker-compose-cccs-tool.yml |
+| lernmodule | Lernmaterial-Portal (nginx) | lernmodule.dirk-schulenburg.net | docker-compose-lernmodule.yml |
+| h5p-preview | H5P Rendering | h5p-preview.dirk-schulenburg.net | docker-compose-h5p-preview.yml |
+| dashboard | Status Dashboard (React) | dashboard.dirk-schulenburg.net | docker-compose-dashboard.yml |
+| react-factory | React-Komponenten-Server | react-factory.dirk-schulenburg.net | mcp-servers/react-factory/docker-compose.yml |
 
-### Directory Structure
+### MCP Servers
+
+| Container | Service | Domain | Tools |
+|-----------|---------|--------|-------|
+| moodle-mcp | Moodle API | mcp-moodle.dirk-schulenburg.net | 73 Tools |
+| wp-mcp | WordPress MCP | mcp-wp.dirk-schulenburg.net | 4 Tools |
+| edugrow-mcp | EduGrow WordPress API | mcp-edugrow.dirk-schulenburg.net | Media, Posts, H5P |
+| imap-mcp | Email Management | mcp-imap.dirk-schulenburg.net | IMAP + SMTP |
+| sharepoint-mcp | MS Graph API | mcp-sharepoint.dirk-schulenburg.net | 10 Tools |
+| teams-mcp | MS Teams API | mcp-teams.dirk-schulenburg.net | 10 Tools + Calendar |
+| ms365-admin-mcp | M365/Entra ID Admin | mcp-ms365.dirk-schulenburg.net | 21 Tools |
+| voice-mcp | Whisper + Kokoro TTS | voice-mcp.dirk-schulenburg.net | STT + TTS (oft gestoppt) |
+
+### Databases
+
+| Container | Engine | For |
+|-----------|--------|-----|
+| n8n-postgres | PostgreSQL | n8n |
+| moodle-db | MariaDB | Moodle |
+| edugrow-db | MariaDB | EduGrow WordPress |
+| hedgedoc-db | PostgreSQL | HedgeDoc |
+
+### Directory Structure (Server)
 
 ```
 /home/dirk/docker/
-├── traefik/
-│   ├── docker-compose.yml
-│   └── traefik.yml
-├── n8n/
-│   └── docker-compose.yml
-├── wordpress/
-│   └── docker-compose.yml
+├── docker-compose-traefik.yml
+├── docker-compose-n8n.yml
+├── docker-compose-hedgedoc.yml
+├── docker-compose-h5p-preview.yml
+├── docker-compose-dashboard.yml
+├── docker-compose-cccs-tool.yml
+├── docker-compose-lernmodule.yml
+├── docker-compose-imap-mcp.yml
+├── docker-compose-moodle-mcp.yml
+├── docker-compose-wp-mcp.yml
+├── docker-compose-voice.yml
 ├── moodle/
-│   └── docker-compose.yml
-└── mcp-servers/
-    ├── wp-mcp/
-    ├── moodle-mcp/
-    └── imap-mcp/
+│   └── docker-compose-official.yml
+├── edugrow/
+│   └── infrastructure/
+│       ├── docker-compose-edugrow-wordpress.yml
+│       ├── docker-compose-edugrow-frontend.yml
+│       └── docker-compose-edugrow-mcp.yml
+├── mcp-servers/
+│   ├── wp-mcp/               (Submodule)
+│   ├── moodle-mcp/           (Submodule)
+│   ├── sharepoint-mcp/
+│   ├── teams-mcp/
+│   ├── ms365-admin-mcp/
+│   └── react-factory/
+├── lernmodule/
+│   └── html/                 (nginx mount)
+├── website/                  (NOT a git repo — deploy via SCP!)
+└── deploy.sh
 ```
 
 ## Quick Commands
@@ -78,32 +115,39 @@ ssh hetzner
 ### Check All Containers
 
 ```bash
-# Via SSH
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
 ```
 
 ### Check Specific Container
 
 ```bash
 # Container status
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker ps -f name=n8n'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker ps -f name=n8n'
 
 # Container logs (last 50 lines)
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker logs n8n --tail 50'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker logs n8n --tail 50'
 
 # Follow logs in real-time
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker logs n8n -f --tail 20'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker logs n8n -f --tail 20'
 ```
 
 ### Health Checks
 
 ```bash
-# Check all MCP servers
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
   echo "=== MCP Health Checks ==="
-  curl -s https://mcp-wp.dirk-schulenburg.net/health && echo " - wp-mcp"
-  curl -s https://mcp-moodle.dirk-schulenburg.net/health && echo " - moodle-mcp"
-  curl -s https://mcp-imap.dirk-schulenburg.net/health && echo " - imap-mcp"
+  for svc in mcp-moodle mcp-wp mcp-edugrow mcp-imap mcp-sharepoint mcp-teams mcp-ms365; do
+    status=$(curl -sf https://${svc}.dirk-schulenburg.net/health 2>/dev/null && echo "OK" || echo "FAIL")
+    echo "  $svc: $status"
+  done
+
+  echo ""
+  echo "=== Application Health ==="
+  curl -sf https://n8n.dirk-schulenburg.net/healthz > /dev/null && echo "  n8n: OK" || echo "  n8n: FAIL"
+  curl -sf https://moodle.dirk-schulenburg.net > /dev/null && echo "  moodle: OK" || echo "  moodle: FAIL"
+  curl -sf https://cannabis-kultur.online > /dev/null && echo "  edugrow: OK" || echo "  edugrow: FAIL"
+  curl -sf https://codimd.dirk-schulenburg.net > /dev/null && echo "  hedgedoc: OK" || echo "  hedgedoc: FAIL"
+  curl -sf https://lernmodule.dirk-schulenburg.net > /dev/null && echo "  lernmodule: OK" || echo "  lernmodule: FAIL"
 '
 ```
 
@@ -113,40 +157,29 @@ ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
 
 ```bash
 # Restart single container
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker restart n8n'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker restart n8n'
 
 # Restart via docker-compose
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
-  cd /home/dirk/docker/n8n
-  docker compose restart
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  docker compose -f docker-compose-n8n.yml restart
 '
-```
-
-### Stop and Start
-
-```bash
-# Stop
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker stop n8n'
-
-# Start
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 'docker start n8n'
 ```
 
 ### Rebuild Container
 
 ```bash
-# Rebuild with new code (MCP servers)
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
-  cd /home/dirk/docker/mcp-servers/wp-mcp
-  docker compose down
-  docker compose up -d --build
+# Rebuild with new code
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  docker compose -f docker-compose-wp-mcp.yml up -d --build
 '
 
 # Rebuild without cache
-ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
-  cd /home/dirk/docker/mcp-servers/wp-mcp
-  docker compose build --no-cache
-  docker compose up -d
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  docker compose -f docker-compose-wp-mcp.yml build --no-cache
+  docker compose -f docker-compose-wp-mcp.yml up -d
 '
 ```
 
@@ -158,9 +191,6 @@ ssh -i C:\Users\mail\.ssh\hetzner_ssh_key dirk@95.217.163.192 '
 # Last 100 lines
 docker logs {container} --tail 100
 
-# Since timestamp
-docker logs {container} --since 2026-01-16T10:00:00
-
 # Last hour
 docker logs {container} --since 1h
 
@@ -168,15 +198,17 @@ docker logs {container} --since 1h
 docker logs {container} 2>&1 | grep -i error
 ```
 
-### Common Log Locations
+### Common Container Names
 
-| Service | Log Command |
-|---------|-------------|
-| Traefik | `docker logs traefik` |
-| n8n | `docker logs n8n` |
-| WordPress | `docker logs wordpress` |
-| Moodle | `docker logs moodle` |
-| MCP Servers | `docker logs mcp-{name}-1` |
+| Service | Container Name |
+|---------|---------------|
+| Traefik | `traefik` |
+| n8n | `n8n` |
+| Moodle | `moodle` |
+| HedgeDoc | `hedgedoc` |
+| EduGrow Frontend | `cannabis-kultur-frontend` |
+| EduGrow WordPress | `edugrow-wordpress` |
+| MCP Servers | `moodle-mcp`, `wp-mcp`, `imap-mcp`, `sharepoint-mcp`, `teams-mcp`, `ms365-admin-mcp` |
 
 ### Log Patterns to Watch
 
@@ -184,11 +216,11 @@ docker logs {container} 2>&1 | grep -i error
 # Error patterns
 docker logs n8n 2>&1 | grep -E "(ERROR|FATAL|Exception)"
 
-# Connection issues
+# Connection issues (Traefik)
 docker logs traefik 2>&1 | grep -E "(502|503|504)"
 
 # Authentication failures
-docker logs mcp-wp-mcp-1 2>&1 | grep -i "auth"
+docker logs moodle-mcp 2>&1 | grep -i "auth"
 ```
 
 ## Troubleshooting
@@ -200,8 +232,8 @@ docker logs mcp-wp-mcp-1 2>&1 | grep -i "auth"
 docker logs {container} --tail 100
 
 # 2. Check compose config
-cd /home/dirk/docker/{service}
-docker compose config
+cd /home/dirk/docker
+docker compose -f {compose-file} config
 
 # 3. Check ports
 netstat -tlnp | grep {port}
@@ -213,44 +245,24 @@ df -h
 free -h
 ```
 
-### Container Keeps Restarting
-
-```bash
-# Check restart policy
-docker inspect {container} | grep -A 5 RestartPolicy
-
-# Check exit code
-docker inspect {container} | grep -A 3 State
-
-# View recent events
-docker events --since 1h --filter container={container}
-```
-
 ### Network Issues
 
 ```bash
-# List networks
-docker network ls
-
-# Inspect network
+# All services use the 'proxy' network
 docker network inspect proxy
 
 # Check container network
 docker inspect {container} | grep -A 20 Networks
-
-# Test internal connectivity
-docker exec {container} ping {other-container}
 ```
 
-### Port Conflicts
+### Moodle-Specific
 
 ```bash
-# Check what's using a port
-netstat -tlnp | grep {port}
-lsof -i :{port}
-
-# Check container port mapping
-docker port {container}
+# CLI-Pfad: /var/www/html (moodlehq Image, NICHT /bitnami/)
+# User: www-data (NICHT daemon)
+docker exec moodle php /var/www/html/admin/cli/purge_caches.php
+docker exec moodle php /var/www/html/admin/cli/maintenance.php --enable
+docker exec moodle php /var/www/html/admin/cli/upgrade.php --non-interactive
 ```
 
 ## Resource Management
@@ -258,43 +270,17 @@ docker port {container}
 ### Check Resource Usage
 
 ```bash
-# Live stats
-docker stats
-
-# One-time snapshot
 docker stats --no-stream
-
-# Specific containers
-docker stats n8n wordpress moodle
 ```
 
 ### Cleanup Commands
 
 ```bash
-# Remove stopped containers
-docker container prune -f
+# Safe cleanup (stopped containers + unused images)
+docker system prune -f && docker image prune -f
 
-# Remove unused images
-docker image prune -f
-
-# Remove unused volumes (CAREFUL!)
-docker volume prune -f
-
-# Full cleanup (unused containers, networks, images)
-docker system prune -f
-
-# Nuclear option (removes everything unused including volumes)
-docker system prune -a --volumes -f
-```
-
-### Check Disk Usage
-
-```bash
-# Docker disk usage
+# Check disk usage
 docker system df
-
-# Detailed breakdown
-docker system df -v
 ```
 
 ## Backup & Restore
@@ -307,16 +293,9 @@ docker exec n8n-postgres pg_dump -U n8n n8n > backup_n8n_$(date +%Y%m%d).sql
 
 # MariaDB (Moodle)
 docker exec moodle-db mysqldump -u root -p$MYSQL_ROOT_PASSWORD moodle > backup_moodle_$(date +%Y%m%d).sql
-```
 
-### Volume Backup
-
-```bash
-# List volumes
-docker volume ls
-
-# Backup volume to tar
-docker run --rm -v {volume_name}:/data -v $(pwd):/backup alpine tar cvf /backup/{volume_name}.tar /data
+# MariaDB (EduGrow WordPress)
+docker exec edugrow-db mysqldump -u root -p$EDUGROW_DB_ROOT_PASSWORD edugrow > backup_edugrow_$(date +%Y%m%d).sql
 ```
 
 ### Restore Database
@@ -331,118 +310,48 @@ cat backup_moodle.sql | docker exec -i moodle-db mysql -u root -p$MYSQL_ROOT_PAS
 
 ## Service-Specific Commands
 
-### Traefik
-
-```bash
-# Check routing
-docker logs traefik | grep -E "Adding route|Router"
-
-# Debug mode (add to traefik.yml)
-# log:
-#   level: DEBUG
-
-# View current routes
-curl -s http://localhost:8080/api/http/routers | jq
-```
-
 ### n8n
 
 ```bash
-# Access CLI
 docker exec -it n8n n8n
-
-# Export workflows
 docker exec n8n n8n export:workflow --all --output=/data/workflows.json
-
-# Import workflow
-docker exec n8n n8n import:workflow --input=/data/workflow.json
 ```
 
-### Databases
+### Database Shells
 
 ```bash
-# PostgreSQL shell
 docker exec -it n8n-postgres psql -U n8n n8n
-
-# MariaDB shell
 docker exec -it moodle-db mysql -u root -p
+docker exec -it edugrow-db mysql -u root -p
 ```
 
-## Monitoring
-
-### Simple Health Script
-
-```bash
-#!/bin/bash
-# Save as /home/dirk/check_health.sh
-
-echo "=== Container Status ==="
-docker ps --format "table {{.Names}}\t{{.Status}}"
-
-echo ""
-echo "=== Resource Usage ==="
-docker stats --no-stream --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
-
-echo ""
-echo "=== Disk Usage ==="
-df -h /
-
-echo ""
-echo "=== Health Checks ==="
-curl -sf https://n8n.dirk-schulenburg.net/healthz > /dev/null && echo "n8n: OK" || echo "n8n: FAIL"
-curl -sf https://moodle.dirk-schulenburg.net > /dev/null && echo "moodle: OK" || echo "moodle: FAIL"
-curl -sf https://www.dirk-schulenburg.net > /dev/null && echo "wordpress: OK" || echo "wordpress: FAIL"
-```
-
-### Alerting (via n8n)
-
-Create n8n workflow:
-1. Schedule trigger (every 5 min)
-2. HTTP Request to health endpoints
-3. IF node to check status
-4. Email/Slack notification on failure
-
-## Quick Reference
-
-### One-Liners
+## Quick Reference One-Liners
 
 ```bash
 # All container status
-ssh hetzner 'docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker ps -a --format "table {{.Names}}\t{{.Status}}"'
 
 # Restart all MCP servers
-ssh hetzner 'for d in wp-mcp moodle-mcp imap-mcp; do cd /home/dirk/docker/mcp-servers/$d && docker compose restart; done'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '
+  cd /home/dirk/docker
+  for f in docker-compose-moodle-mcp.yml docker-compose-wp-mcp.yml docker-compose-imap-mcp.yml; do
+    docker compose -f $f restart
+  done
+  cd mcp-servers/sharepoint-mcp && docker compose restart && cd ../..
+  cd mcp-servers/teams-mcp && docker compose restart && cd ../..
+  cd mcp-servers/ms365-admin-mcp && docker compose restart
+'
 
-# View all logs with errors
-ssh hetzner 'docker ps -q | xargs -I {} docker logs {} 2>&1 | grep -i error | tail -20'
+# View all errors across containers (last hour)
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker ps -q | xargs -I {} sh -c "echo === {} === && docker logs {} --since 1h 2>&1 | grep -i error | tail -5"'
 
 # Disk cleanup
-ssh hetzner 'docker system prune -f && docker image prune -f'
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 'docker system prune -f && docker image prune -f'
+
+# Deploy script
+ssh -i ~/.ssh/hetzner_ssh_key dirk@95.217.163.192 '/home/dirk/docker/deploy.sh {server-name}'
 ```
 
 ---
 
-## Logging
-
-Bei Ausführung dieses Skills wird automatisch geloggt:
-
-| Feld | Wert |
-|------|------|
-| **Agent** | devops |
-| **Action** | docker:manage |
-| **Context** | container, operation, status |
-| **Result** | success/failure |
-
-**Beispiel-Log:**
-```json
-{
-  "agent": "devops",
-  "action": "docker:manage",
-  "context": "{\"container\": \"n8n\", \"operation\": \"restart\", \"status\": \"running\"}",
-  "result": "success"
-}
-```
-
----
-
-*DevOps Skill - Docker Management*
+*DevOps Skill - Docker Management v2.0 (2026-03-12)*
