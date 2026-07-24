@@ -49,19 +49,19 @@ license: MIT
 from h5p_containers import create_interactive_book
 
 result = create_interactive_book(
-    "Scrum-Buch",
+    "Scrum 手册",
     chapters=[
         {
-            "title": "Kapitel 1: Rollen",
+            "title": "第 1 章：角色",
             "elements": [
-                {"library": "H5P.AdvancedText 1.1", "params": {"text": "<h2>Rollen</h2>"}},
+                {"library": "H5P.AdvancedText 1.1", "params": {"text": "<h2>角色</h2>"}},
                 {"library": "H5P.Dialogcards 1.9", "params": {"dialogs": [...]}},
                 {"library": "H5P.MultiChoice 1.16", "params": {"question": "...", "answers": [...]}}
             ]
         }
     ],
-    cover_description="Ein Buch ueber Scrum",
-    base_color="#003366"  # BS:WI Navy
+    cover_description="一本关于 Scrum 的书",
+    base_color="#003366"  # BS:WI 海军蓝
 )
 ```
 
@@ -73,34 +73,34 @@ result = create_interactive_book(
 from h5p_containers import create_course_presentation
 
 result = create_course_presentation(
-    "Scrum-Praesentation",
+    "Scrum 课程演示",
     slides=[
-        # Layout: title_only (Intro)
-        {"layout": "title_only", "title": "Einfuehrung"},
+        # 布局: title_only (简介)
+        {"layout": "title_only", "title": "简介"},
 
-        # Layout: text_content
-        {"layout": "text_content", "title": "Was ist Scrum?", "content": "<p>...</p>"},
+        # 布局: text_content
+        {"layout": "text_content", "title": "什么是 Scrum？", "content": "<p>...</p>"},
 
-        # Layout: interactive (Text + H5P-Element)
+        # 布局: interactive (Text + H5P 元素)
         {
             "layout": "interactive",
-            "title": "Quiz",
-            "content": "<p>Beantworte:</p>",
+            "title": "测验",
+            "content": "<p>回答：</p>",
             "interactive": {
                 "library": "H5P.TrueFalse 1.8",
-                "params": {"question": "<p>Scrum hat 3 Rollen.</p>", "correct": "true"}
+                "params": {"question": "<p>Scrum 包含 3 个角色。</p>", "correct": "true"}
             }
         },
 
-        # Layout: interactive_full (vollflaechig)
+        # 布局: interactive_full (完整)
         {
             "layout": "interactive_full",
-            "title": "Zuordnung",
+            "title": "任务",
             "interactive": {"library": "H5P.DragText 1.10", "params": {...}}
         },
 
-        # Layout: split (links Text, rechts Interaktion)
-        {"layout": "split", "title": "Uebung", "content": "<p>Info</p>", "interactive": {...}}
+        # 布局: split (左侧为文字，右侧为交互界面)
+        {"layout": "split", "title": "练习", "content": "<p>信息</p>", "interactive": {...}}
     ]
 )
 ```
@@ -132,11 +132,11 @@ from h5p_system import H5PSystem
 
 system = H5PSystem(brand='bswi')
 
-# Generieren + automatisch verifizieren
+# 生成 + 自动验证
 result = system.generate_and_verify(lernmaterial, content_items)
-# result.statistics['verification'] enthaelt Screenshots + Check-Ergebnisse
+# result.statistics['verification'] 包含屏幕截图和检查结果
 
-# Einzelne Datei verifizieren
+# 核实个人文件
 from visual_verify import verify_h5p
 vr = verify_h5p("path/to/file.h5p")
 print(vr.summary())
