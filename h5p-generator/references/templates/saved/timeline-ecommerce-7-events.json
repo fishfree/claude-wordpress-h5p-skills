@@ -2,9 +2,9 @@
   "name": "timeline-ecommerce-7-events",
   "content_type": "Timeline",
   "created": "2026-01-24T18:46:01.772284",
-  "notes": "embedTypes=div, TimelineJS dependency, nur Jahreszahlen",
+  "notes": "embedTypes=div，依赖 TimelineJS，仅使用年份",
   "h5p_meta": {
-    "title": "Geschichte des Online-Handels",
+    "title": "在线商务发展史",
     "language": "de",
     "mainLibrary": "H5P.Timeline",
     "embedTypes": [
@@ -26,12 +26,12 @@
   },
   "content_structure": {
     "timeline": {
-      "headline": "Geschichte des Online-Handels",
-      "text": "<p>Die Entwicklung des E-Commerce von 1994 bis heute</p>",
+      "headline": "在线商务发展史",
+      "text": "<p>电子商务从 1994 年至今的发展历程</p>",
       "date": [
         {
-          "headline": "Amazon gegründet",
-          "text": "<p>Jeff Bezos gründet Amazon als Online-Buchhandlung.</p>",
+          "headline": "Amazon 成立",
+          "text": "<p>杰夫·贝索斯（Jeff Bezos）创立 Amazon，最初是一家在线书店。</p>",
           "startDate": "1994",
           "endDate": "1994",
           "asset": {
@@ -40,8 +40,8 @@
           }
         },
         {
-          "headline": "eBay startet",
-          "text": "<p>Pierre Omidyar gründet eBay als Auktionsplattform.</p>",
+          "headline": "eBay 上线",
+          "text": "<p>皮埃尔·奥米迪亚（Pierre Omidyar）创立 eBay 拍卖平台。</p>",
           "startDate": "1995",
           "endDate": "1995",
           "asset": {
@@ -50,8 +50,8 @@
           }
         },
         {
-          "headline": "PayPal gegründet",
-          "text": "<p>Sicheres Online-Bezahlen wird möglich.</p>",
+          "headline": "PayPal 成立",
+          "text": "<p>安全的在线支付开始成为现实。</p>",
           "startDate": "1998",
           "endDate": "1998",
           "asset": {
@@ -60,8 +60,8 @@
           }
         },
         {
-          "headline": "Zalando startet",
-          "text": "<p>Deutscher Online-Modehändler gegründet.</p>",
+          "headline": "Zalando 上线",
+          "text": "<p>德国在线时尚零售商 Zalando 成立。</p>",
           "startDate": "2008",
           "endDate": "2008",
           "asset": {
@@ -70,8 +70,8 @@
           }
         },
         {
-          "headline": "Mobile Commerce",
-          "text": "<p>Smartphones revolutionieren das Einkaufen.</p>",
+          "headline": "移动电子商务",
+          "text": "<p>智能手机彻底改变了人们的购物方式。</p>",
           "startDate": "2010",
           "endDate": "2010",
           "asset": {
@@ -80,8 +80,8 @@
           }
         },
         {
-          "headline": "Same-Day Delivery",
-          "text": "<p>Amazon Prime Now bietet Lieferung am selben Tag.</p>",
+          "headline": "当日达配送",
+          "text": "<p>Amazon Prime Now 推出当日送达服务。</p>",
           "startDate": "2015",
           "endDate": "2015",
           "asset": {
@@ -90,8 +90,8 @@
           }
         },
         {
-          "headline": "Corona-Boom",
-          "text": "<p>Pandemie beschleunigt Online-Handel massiv.</p>",
+          "headline": "新冠疫情推动电商增长",
+          "text": "<p>新冠疫情大幅加速了电子商务的发展。</p>",
           "startDate": "2020",
           "endDate": "2020",
           "asset": {
@@ -107,7 +107,7 @@
       },
       "defaultZoomLevel": 0,
       "height": 600,
-      "language": "de"
+      "language": "zh-hans"
     }
   }
 }
