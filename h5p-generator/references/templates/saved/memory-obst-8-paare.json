@@ -2,9 +2,9 @@
   "name": "memory-obst-8-paare",
   "content_type": "MemoryGame",
   "created": "2026-01-24T18:46:01.769887",
-  "notes": "Funktioniert mit Unsplash-Bildern, 8 Paare = 16 Felder",
+  "notes": "可正常运行，使用 Unsplash 图片，8 对卡片（共 16 张）",
   "h5p_meta": {
-    "title": "Obstsorten Memory",
+    "title": "水果记忆游戏",
     "language": "de",
     "mainLibrary": "H5P.MemoryGame",
     "embedTypes": [
@@ -22,8 +22,8 @@
   "content_structure": {
     "cards": [
       {
-        "description": "Apfel",
-        "imageAlt": "Apfel",
+        "description": "苹果",
+        "imageAlt": "苹果",
         "image": {
           "path": "https://images.unsplash.com/photo-1568702846914-96b305d2uj29?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -33,8 +33,8 @@
         }
       },
       {
-        "description": "Banane",
-        "imageAlt": "Banane",
+        "description": "香蕉",
+        "imageAlt": "香蕉",
         "image": {
           "path": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -44,8 +44,8 @@
         }
       },
       {
-        "description": "Orange",
-        "imageAlt": "Orange",
+        "description": "橙子",
+        "imageAlt": "橙子",
         "image": {
           "path": "https://images.unsplash.com/photo-1547514701-42782101795e?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -55,8 +55,8 @@
         }
       },
       {
-        "description": "Erdbeere",
-        "imageAlt": "Erdbeere",
+        "description": "草莓",
+        "imageAlt": "草莓",
         "image": {
           "path": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -66,8 +66,8 @@
         }
       },
       {
-        "description": "Kirsche",
-        "imageAlt": "Kirsche",
+        "description": "樱桃",
+        "imageAlt": "樱桃",
         "image": {
           "path": "https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -77,8 +77,8 @@
         }
       },
       {
-        "description": "Weintraube",
-        "imageAlt": "Weintraube",
+        "description": "葡萄",
+        "imageAlt": "葡萄",
         "image": {
           "path": "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -88,8 +88,8 @@
         }
       },
       {
-        "description": "Ananas",
-        "imageAlt": "Ananas",
+        "description": "菠萝",
+        "imageAlt": "菠萝",
         "image": {
           "path": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -99,8 +99,8 @@
         }
       },
       {
-        "description": "Mango",
-        "imageAlt": "Mango",
+        "description": "芒果",
+        "imageAlt": "芒果",
         "image": {
           "path": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&h=300&fit=crop",
           "mime": "image/jpeg",
@@ -115,19 +115,20 @@
       "allowRetry": true
     },
     "l10n": {
-      "cardTurns": "Züge",
-      "timeSpent": "Zeit",
-      "feedback": "Gut gemacht!",
-      "tryAgain": "Nochmal",
-      "closeLabel": "Schließen",
-      "label": "Memory: Obstsorten Memory",
-      "done": "Alle Paare gefunden!",
-      "cardPrefix": "Karte %num:",
-      "cardUnturned": "Nicht umgedreht.",
-      "cardMatched": "Paar gefunden."
+      "cardTurns": "翻牌次数",
+      "timeSpent": "用时",
+      "feedback": "做得很好！",
+      "tryAgain": "再试一次",
+      "closeLabel": "关闭",
+      "label": "记忆游戏：水果记忆游戏",
+      "done": "已找到所有配对！",
+      "cardPrefix": "卡片 %num：",
+      "cardUnturned": "尚未翻开。",
+      "cardMatched": "已找到一对。"
     },
     "lookNFeel": {
       "themeColor": "#4caf50"
     }
   }
 }
+
