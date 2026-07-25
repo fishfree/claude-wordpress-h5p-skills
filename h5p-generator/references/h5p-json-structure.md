@@ -13,11 +13,11 @@ H5P files are ZIP archives with:
   "question": "<p>Statement text</p>",
   "correct": "true",  // or "false" (string!)
   "l10n": {
-    "trueText": "Wahr",
-    "falseText": "Falsch"
+    "trueText": "正确",
+    "falseText": "错误"
   },
-  "feedbackOnCorrect": "Richtig!",
-  "feedbackOnWrong": "Leider falsch."
+  "feedbackOnCorrect": "正确！",
+  "feedbackOnWrong": "很遗憾，回答错误。"
 }
 ```
 
@@ -29,7 +29,7 @@ Multiple accepted answers: `*answer1/answer2*`
 
 ```json
 {
-  "text": "<p>Die Hauptstadt ist *Berlin*.</p>",
+  "text": "<p>德国首都是 *柏林*。</p>",
   "behaviour": {
     "caseSensitive": false,
     "acceptSpellingErrors": true
@@ -55,7 +55,7 @@ Multiple accepted answers: `*answer1/answer2*`
 
 ## Drag and Drop (H5P.DragQuestion)
 
-**ACHTUNG:** Siehe Abschnitt "KRITISCH: H5P.DragQuestion Positionierung" am Ende!
+**注意：** 请参见文末的“关键：H5P.DragQuestion 定位”章节！
 
 ```json
 {
@@ -139,17 +139,17 @@ Wrapper for multiple questions:
 
 | Library | Version | Use Case |
 |---------|---------|----------|
-| H5P.QuestionSet | 1.20 | Wrapper für Fragen |
-| H5P.TrueFalse | 1.8 | Wahr/Falsch |
-| H5P.MultiChoice | 1.16 | Multiple Choice |
-| H5P.Blanks | 1.14 | Lückentext |
-| H5P.DragQuestion | 1.14 | Drag & Drop |
-| H5P.SingleChoiceSet | 1.11 | Schnelle Single Choice |
-| H5P.Dialogcards | 1.9 | Lernkarten |
-| H5P.MarkTheWords | 1.11 | Wörter markieren |
-| H5P.Summary | 1.10 | Zusammenfassung |
-| H5P.Accordion | 1.0 | Aufklappbare Abschnitte |
-| H5P.AdvancedText | 1.1 | Text-Komponente |
+| H5P.QuestionSet | 1.20 | 题集容器 |
+| H5P.TrueFalse | 1.8 | 判断题 |
+| H5P.MultiChoice | 1.16 | 多选题 |
+| H5P.Blanks | 1.14 | 填空题 |
+| H5P.DragQuestion | 1.14 | 拖拽题 |
+| H5P.SingleChoiceSet | 1.11 | 单选题 |
+| H5P.Dialogcards | 1.9 | 闪卡 |
+| H5P.MarkTheWords | 1.11 | 标记单词 |
+| H5P.Summary | 1.10 | 总结/摘要 |
+| H5P.Accordion | 1.0 | 可折叠章节（手风琴式） |
+| H5P.AdvancedText | 1.1 | 文本组件 |
 
 ## New Content Types
 
@@ -244,44 +244,44 @@ Wrapper for multiple questions:
 
 ---
 
-## KRITISCH: H5P.DragQuestion Positionierung & Größen
+## 关键：H5P.DragQuestion 定位与尺寸
 
-**WICHTIG:** Die width/height Werte in DragQuestion sind KEINE Prozente!
+**重要：** DragQuestion 中的 width/height 值**不是百分比**！
 
-### Einheiten-Konvertierung (empirisch ermittelt)
+### 单位换算（经验测得）
 
-| JSON-Feld | Umrechnung | Beispiel |
+| JSON-Feld | 换算关系 | 示例 |
 |-----------|------------|----------|
-| `x`, `y` | ~7px pro Einheit | x: 37 → 259px |
-| `width`, `height` | ~18px pro Einheit (EM) | width: 10 → 180px |
+| `x`, `y` | 每单位约 7px | x: 37 → 259px |
+| `width`, `height` | 每单位约 18px（EM） | width: 10 → 180px |
 
-### Dropzones ohne Überlappung berechnen
+### 计算无重叠的 Dropzone
 
-**Problem:** `width: 20` wird zu ~360px → bei 3 Zonen massive Überlappung!
+**问题：** `width: 20` 会变成约 360px → 三个区域会发生严重重叠！
 
-**Lösung:** Kleinere width-Werte verwenden und Positionen berechnen:
+**解决方案：** 使用更小的 width 值，并计算各区域的位置：
 
 ```
-Beispiel für 3 nicht-überlappende Dropzones (700px Container):
+700px 容器中 3 个互不重叠 Dropzone 示例：
 
-Zone 1: x=3,  width=10  → left=21px,  right=201px (180px breit)
-Zone 2: x=37, width=10  → left=259px, right=439px (180px breit)
-Zone 3: x=71, width=10  → left=497px, right=677px (180px breit)
+Zone 1: x=3,  width=10  → left=21px,  right=201px（宽180px）
+Zone 2: x=37, width=10  → left=259px, right=439px（宽180px）
+Zone 3: x=71, width=10  → left=497px, right=677px（宽180px）
 
-Lücken: ~57px zwischen den Zonen ✓
+间距：各区域之间约 57px ✓
 ```
 
-### Formel für Positionsberechnung
+### 位置计算公式
 
 ```
 position_px = x_value * 7
 width_px = width_value * 18
 
-Für Lücke zwischen Zone A und Zone B:
+计算 Zone A 与 Zone B 之间的间距：
 gap_px = (x_B * 7) - (x_A * 7 + width_A * 18)
 ```
 
-### Funktionierende Konfiguration (getestet)
+### 可正常工作的配置（已测试）
 
 ```json
 "dropZones": [
@@ -291,14 +291,14 @@ gap_px = (x_B * 7) - (x_A * 7 + width_A * 18)
 ]
 ```
 
-### Draggable Elements (optimale Größen)
+### Draggable Elements（推荐尺寸）
 
-**Empfohlene Werte:**
-- `width: 6-8` je nach Textlänge (kurz: 6, lang: 8)
-- `height: 2` für einzeiligen Text
-- `font-size: 12px` im HTML
+**推荐参数：**
+- `width: 6-8`，根据文本长度调整（短文本：6，长文本：8）
+- `height: 2`，适用于单行文本
+- HTML 中使用 `font-size: 12px`
 
-**Beispiel-Konfiguration:**
+**配置示例：**
 ```json
 {
   "x": 2, "y": 2,
@@ -307,31 +307,31 @@ gap_px = (x_B * 7) - (x_A * 7 + width_A * 18)
   "type": {
     "library": "H5P.AdvancedText 1.1",
     "params": {
-      "text": "<p style='text-align:center;margin:0;font-size:12px;font-weight:bold;'>Kurzer Text</p>"
+      "text": "<p style='text-align:center;margin:0;font-size:12px;font-weight:bold;'>短文本</p>"
     }
   }
 }
 ```
 
-**Textlänge → Width:**
-| Zeichen | Width |
+**文本长度 → 宽度：**
+| 字符数 | 宽度 |
 |---------|-------|
 | 10-15 | 6 |
 | 16-19 | 7 |
 | 20+ | 8 |
 
-- Können sich überlappen (wird beim Drag aufgelöst)
-- Text darf umbrechen - das ist OK
+- 可以相互重叠（拖拽过程中会自动分开）
+- 文本允许自动换行，这是正常的
 
-### Canvas-Größe
+### 画布尺寸
 
 ```json
 "settings": {
-  "size": {"width": 620, "height": 450}  // Standard
+  "size": {"width": 620, "height": 450}  // 默认值
 }
 ```
 
-### Hintergrundbilder
+### 背景图片
 
 ```json
 "background": {
@@ -340,7 +340,7 @@ gap_px = (x_B * 7) - (x_A * 7 + width_A * 18)
 }
 ```
 
-### Opacity
+### 不透明度（Opacity）
 
-- `backgroundOpacity: 70` für Elemente (0-100)
-- Gilt für Draggables und Dropzones separat
+- `backgroundOpacity: 70` 用于元素（范围 0-100）
+- Draggable 与 Dropzone 分别独立设置
