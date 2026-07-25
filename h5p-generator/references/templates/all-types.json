@@ -1,15 +1,15 @@
 {
   "_meta": {
-    "description": "Template-Bibliothek für alle H5P Content-Typen",
-    "source": "h5p.org official examples + UBC examples",
+    "description": "所有 H5P 内容类型的模板库",
+    "source": "h5p.org 官方示例 + UBC 示例",
     "validated": "2026-01-24"
   },
 
   "fill-in-blanks": {
     "library": "H5P.Blanks 1.14",
     "structure": {
-      "questions": ["<p>Text with *blank* words.</p>"],
-      "text": "<p>Instructions for the learner.</p>",
+      "questions": ["<p>包含 *填空* 单词的文本。</p>"],
+      "text": "<p>给学习者的说明。</p>",
       "behaviour": {
         "caseSensitive": false,
         "acceptSpellingErrors": true,
@@ -22,19 +22,19 @@
     "blank_syntax": {
       "single": "*answer*",
       "alternatives": "*answer1/answer2*",
-      "tip": "*answer:tip text*"
+      "tip": "*answer:提示文本*"
     }
   },
 
   "dialog-cards": {
     "library": "H5P.Dialogcards 1.9",
     "structure": {
-      "title": "<p>Card Set Title</p>",
-      "description": "<p>Instructions</p>",
+      "title": "<p>卡片集标题</p>",
+      "description": "<p>使用说明</p>",
       "dialogs": [
         {
-          "text": "<p style='text-align:center;'>Front side</p>",
-          "answer": "<p style='text-align:center;'>Back side</p>",
+          "text": "<p style='text-align:center;'>正面</p>",
+          "answer": "<p style='text-align:center;'>背面</p>",
           "tips": {}
         }
       ],
@@ -53,8 +53,8 @@
     "structure": {
       "choices": [
         {
-          "question": "Question text?",
-          "answers": ["Correct answer", "Wrong 1", "Wrong 2"]
+          "question": "题目内容？",
+          "answers": ["正确答案", "错误答案 1", "错误答案 2"]
         }
       ],
       "behaviour": {
@@ -66,29 +66,29 @@
         "passPercentage": 60
       }
     },
-    "note": "First answer is always correct"
+    "note": "第一个答案始终为正确答案"
   },
 
   "true-false": {
     "library": "H5P.TrueFalse 1.8",
     "structure": {
-      "question": "<p>Statement to evaluate</p>",
+      "question": "<p>待判断的陈述</p>",
       "correct": "true",
       "l10n": {
-        "trueText": "Wahr",
-        "falseText": "Falsch"
+        "trueText": "正确",
+        "falseText": "错误"
       },
-      "feedbackOnCorrect": "Richtig! Erklärung...",
-      "feedbackOnWrong": "Falsch. Die richtige Antwort ist..."
+      "feedbackOnCorrect": "回答正确！解释……",
+      "feedbackOnWrong": "回答错误。正确答案是……"
     },
-    "note": "correct value is STRING 'true' or 'false'"
+    "note": "correct 的值必须是字符串 'true' 或 'false'"
   },
 
   "mark-the-words": {
     "library": "H5P.MarkTheWords 1.11",
     "structure": {
-      "taskDescription": "<p>Click the correct words!</p>",
-      "textField": "Text with *correct* words marked with *asterisks*.",
+      "taskDescription": "<p>点击正确的单词！</p>",
+      "textField": "文本中用 *星号* 标记 *正确* 的单词。",
       "behaviour": {
         "enableRetry": true,
         "enableSolutionsButton": true,
@@ -102,19 +102,19 @@
   "summary": {
     "library": "H5P.Summary 1.10",
     "structure": {
-      "intro": "<p>Choose the correct statement.</p>",
+      "intro": "<p>请选择正确的陈述。</p>",
       "summaries": [
         {
           "summary": [
-            "<p>Correct statement (first)</p>",
-            "<p>Wrong statement 1</p>",
-            "<p>Wrong statement 2</p>"
+            "<p>正确陈述（第一项）</p>",
+            "<p>错误陈述 1</p>",
+            "<p>错误陈述 2</p>"
           ],
-          "tip": "Optional hint"
+          "tip": "可选提示"
         }
       ]
     },
-    "note": "First statement in each summary is correct"
+    "note": "每组 summary 中第一条陈述始终为正确答案"
   },
 
   "accordion": {
@@ -123,9 +123,11 @@
     "structure": {
       "panels": [
         {
-          "title": "Section Title",
+          "title": "章节标题",
           "content": {
-            "params": {"text": "<p>Content here</p>"},
+            "params": {
+              "text": "<p>这里填写内容</p>"
+            },
             "library": "H5P.AdvancedText 1.1"
           }
         }
@@ -139,8 +141,8 @@
     "structure": {
       "introPage": {
         "showIntroPage": true,
-        "title": "Quiz Title",
-        "introduction": "<p>Instructions</p>"
+        "title": "测验标题",
+        "introduction": "<p>使用说明</p>"
       },
       "progressType": "dots",
       "passPercentage": 60,
@@ -152,16 +154,16 @@
         }
       ],
       "texts": {
-        "prevButton": "Zurück",
-        "nextButton": "Weiter",
-        "finishButton": "Fertig",
-        "textualProgress": "Frage @current von @total"
+        "prevButton": "上一题",
+        "nextButton": "下一题",
+        "finishButton": "完成",
+        "textualProgress": "第 @current 题，共 @total 题"
       },
       "endGame": {
         "showResultPage": true,
         "showSolutionButton": true,
         "showRetryButton": true,
-        "message": "Du hast @score von @total Punkten erreicht."
+        "message": "总分 @total，你获得了 @score 。"
       }
     }
   }
